@@ -37,11 +37,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -51,6 +47,8 @@ public class TelaInicial extends javax.swing.JFrame {
         jButtonLancamentos = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jButtonCadastros = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -65,7 +63,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 51, 102));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(2, 17, 55));
+        jPanel3.setBackground(new java.awt.Color(29, 31, 39));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -84,47 +82,29 @@ public class TelaInicial extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 500));
 
-        jPanel1.setBackground(new java.awt.Color(31, 48, 93));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("User");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 10, -1, -1));
-
-        jLabel3.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Desktop");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 780, 40));
-
-        jPanel5.setBackground(new java.awt.Color(214, 217, 224));
+        jPanel5.setBackground(new java.awt.Color(204, 0, 51));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\elena\\Desktop\\Icones sistema\\if_wrench_416405.png")); // NOI18N
-        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 150, 130));
-
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("JV Mecânica e Solda LTDA - ME");
         jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, 50));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("JV Mecânica e Solda LTDA - ME");
         jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, 50));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 780, 130));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 800, 130));
 
-        jPanel6.setBackground(new java.awt.Color(106, 115, 145));
+        jPanel6.setBackground(new java.awt.Color(117, 117, 123));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 710, 30));
 
-        jPanel7.setBackground(new java.awt.Color(106, 115, 145));
+        jPanel7.setBackground(new java.awt.Color(117, 117, 123));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonConsultas.setText("Consultas");
@@ -132,7 +112,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 250, 230, 150));
 
-        jPanel8.setBackground(new java.awt.Color(106, 115, 145));
+        jPanel8.setBackground(new java.awt.Color(117, 117, 123));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonLancamentos.setText("Lançamentos");
@@ -140,7 +120,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 230, 150));
 
-        jPanel9.setBackground(new java.awt.Color(106, 115, 145));
+        jPanel9.setBackground(new java.awt.Color(117, 117, 123));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonCadastros.setBackground(new java.awt.Color(106, 115, 145));
@@ -153,6 +133,16 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel9.add(jButtonCadastros, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 110, 30));
 
         jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 230, 150));
+
+        jLabel3.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel3.setText("Desktop");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        jLabel2.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel2.setText("User");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 800, 500));
 
@@ -220,7 +210,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -229,7 +218,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;

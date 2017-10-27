@@ -35,8 +35,6 @@ public class CadastroPessoa extends javax.swing.JFrame {
         jLabelTipoPessoa = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTabela = new javax.swing.JTable();
-        jButtonIncluir = new javax.swing.JButton();
-        jButtonAlterar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
         jPasswordFieldSenha = new javax.swing.JPasswordField();
         jTextFieldDocumento = new javax.swing.JTextField();
@@ -48,9 +46,13 @@ public class CadastroPessoa extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jButton2 = new javax.swing.JButton();
         jLabelTipoPessoa1 = new javax.swing.JLabel();
+        jButtonExcluir1 = new javax.swing.JButton();
+        jButtonExcluir2 = new javax.swing.JButton();
+        jButtonExcluir3 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jButtonExcluir4 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -80,14 +82,14 @@ public class CadastroPessoa extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 80, Short.MAX_VALUE)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 740, 80));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 740, 60));
 
         jRadioButtonJuridica.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jRadioButtonJuridica.setText("Juridica");
-        jPanel2.add(jRadioButtonJuridica, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 140, -1, -1));
+        jPanel2.add(jRadioButtonJuridica, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 140, -1, -1));
 
         jRadioButtonFisica.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jRadioButtonFisica.setText("Física");
@@ -96,10 +98,10 @@ public class CadastroPessoa extends javax.swing.JFrame {
                 jRadioButtonFisicaActionPerformed(evt);
             }
         });
-        jPanel2.add(jRadioButtonFisica, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, 70, -1));
+        jPanel2.add(jRadioButtonFisica, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 140, 70, -1));
 
         jLabelTipoPessoa.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabelTipoPessoa.setForeground(new java.awt.Color(255, 51, 51));
+        jLabelTipoPessoa.setForeground(new java.awt.Color(204, 0, 51));
         jLabelTipoPessoa.setText("Cadastro");
         jPanel2.add(jLabelTipoPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
 
@@ -116,26 +118,11 @@ public class CadastroPessoa extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableTabela);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 690, 90));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 700, 90));
 
-        jButtonIncluir.setText("Incluir");
-        jButtonIncluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIncluirActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButtonIncluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 290, 98, -1));
-
-        jButtonAlterar.setText("Alterar");
-        jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAlterarActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButtonAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 95, -1));
-
-        jButtonExcluir.setText("Excluir");
-        jPanel2.add(jButtonExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 290, 89, -1));
+        jButtonExcluir.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jButtonExcluir.setText("Fechar");
+        jPanel2.add(jButtonExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 470, 100, 30));
 
         jPasswordFieldSenha.setText("jPasswordField1");
         jPanel2.add(jPasswordFieldSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 170, -1));
@@ -178,15 +165,33 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 510));
 
-        jToggleButton1.setText("Salvar");
-        jPanel2.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 470, -1, -1));
-
-        jButton2.setText("Fechar");
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 470, -1, -1));
-
         jLabelTipoPessoa1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabelTipoPessoa1.setText("Tipo pessoa");
-        jPanel2.add(jLabelTipoPessoa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 140, -1, -1));
+        jPanel2.add(jLabelTipoPessoa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, -1, -1));
+
+        jButtonExcluir1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jButtonExcluir1.setText("Excluir");
+        jPanel2.add(jButtonExcluir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 89, -1));
+
+        jButtonExcluir2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jButtonExcluir2.setText("Incluir");
+        jPanel2.add(jButtonExcluir2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 89, -1));
+
+        jButtonExcluir3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jButtonExcluir3.setText("Salvar");
+        jPanel2.add(jButtonExcluir3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 470, 100, 30));
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel3.setText("Localizar");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
+
+        jSeparator1.setBackground(new java.awt.Color(29, 31, 39));
+        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 660, 20));
+
+        jButtonExcluir4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jButtonExcluir4.setText("Alterar");
+        jPanel2.add(jButtonExcluir4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 89, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 510));
 
@@ -200,14 +205,6 @@ public class CadastroPessoa extends javax.swing.JFrame {
     private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNomeActionPerformed
-
-    private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAlterarActionPerformed
-
-    private void jButtonIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonIncluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,12 +242,14 @@ public class CadastroPessoa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonExcluir;
-    private javax.swing.JButton jButtonIncluir;
+    private javax.swing.JButton jButtonExcluir1;
+    private javax.swing.JButton jButtonExcluir2;
+    private javax.swing.JButton jButtonExcluir3;
+    private javax.swing.JButton jButtonExcluir4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -265,9 +264,9 @@ public class CadastroPessoa extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButtonFisica;
     private javax.swing.JRadioButton jRadioButtonJuridica;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTableTabela;
     private javax.swing.JTextField jTextFieldDocumento;
     private javax.swing.JTextField jTextFieldNome;
-    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }
