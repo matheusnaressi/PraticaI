@@ -66,7 +66,7 @@ public class Login extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 51, 102));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(50, 58, 71));
+        jPanel3.setBackground(new java.awt.Color(106, 115, 145));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel3.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 190, -1));
         jPanel3.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, 90, 10));
@@ -91,12 +91,12 @@ public class Login extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 430));
 
-        jPanel1.setBackground(new java.awt.Color(72, 79, 97));
+        jPanel1.setBackground(new java.awt.Color(214, 217, 224));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Usuário");
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel2.setText("Senha");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 180, 20));
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -105,17 +105,17 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 190, -1));
         jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 190, 10));
 
-        jPasswordField1.setBackground(new java.awt.Color(72, 79, 97));
+        jPasswordField1.setBackground(new java.awt.Color(214, 217, 224));
         jPasswordField1.setForeground(new java.awt.Color(255, 255, 255));
         jPasswordField1.setText("jPasswordField1");
         jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 190, 20));
 
-        jTextFieldUsuario.setBackground(new java.awt.Color(72, 79, 97));
+        jTextFieldUsuario.setBackground(new java.awt.Color(214, 217, 224));
         jTextFieldUsuario.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(jTextFieldUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 190, 20));
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("Usuário");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 180, 20));
 
@@ -128,11 +128,11 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 130, 30));
 
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Esqueci minha senha ");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, -1, -1));
 
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setForeground(new java.awt.Color(51, 51, 51));
         jLabel9.setText("Alterar senha");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, -1, -1));
 
