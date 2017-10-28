@@ -5,6 +5,16 @@
  */
 package form;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.Peca;
+import org.hibernate.Session;
+import util.HibernateUtil;
+
 /**
  *
  * @author elena
@@ -49,6 +59,8 @@ public class CadastroPecas extends javax.swing.JFrame {
         jLabel3.setText("Quantidade estoque");
 
         jLabel4.setText("Data entrada");
+
+        jTextDataEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
         jLabel2.setText("Valor unitário");
 
@@ -159,7 +171,36 @@ public class CadastroPecas extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String descricao = jTextDescricao.getText();
+        int qtd_estoque = Integer.parseInt(jTextQuantida.getText());
+        String data_entrada = jTextDataEntrada.getText();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/YYYY");
+        Date date = null;
+//        try {
+//            date = sdf.parse(data_entrada);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(CadastroPecas.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        double valor_uni = Double.parseDouble(jTextValorUnitario.getText());
         
+        if (descricao == "") {
+            JOptionPane.showMessageDialog(this, "Preencher a descrição da peça!");
+        } else if (data_entrada == null) {
+            JOptionPane.showMessageDialog(this, "Preencher a data de entrada da peça!");
+        } else if (valor_uni == 0.00) {
+            JOptionPane.showMessageDialog(this, "Preencher o valor unitário da peça!");
+        }
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Peca cad_pecas = new Peca();
+        cad_pecas.setDescricaopeca(descricao);
+        cad_pecas.setQuantidade(qtd_estoque);
+        cad_pecas.setValor_praticado(valor_uni);
+        //cad_pecas.setData_entrada(date);
+        
+        session.getTransaction().begin();
+        session.save(cad_pecas);
+        session.getTransaction().commit();
+
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
