@@ -36,7 +36,7 @@ public class CadastroPecas extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextValorUnitario = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableListagemCadPecas = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -52,7 +52,7 @@ public class CadastroPecas extends javax.swing.JFrame {
 
         jLabel2.setText("Valor unitário");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableListagemCadPecas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -63,7 +63,7 @@ public class CadastroPecas extends javax.swing.JFrame {
                 "Codigo", "Descrição", "Quantidade", "Data entrada", "Valor"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableListagemCadPecas);
 
         jButton1.setText("Incluir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -158,7 +158,8 @@ public class CadastroPecas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        String descricao = jTextDescricao.getText();
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -208,7 +209,7 @@ public class CadastroPecas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableListagemCadPecas;
     private javax.swing.JFormattedTextField jTextDataEntrada;
     private javax.swing.JTextField jTextDescricao;
     private javax.swing.JTextField jTextQuantida;
