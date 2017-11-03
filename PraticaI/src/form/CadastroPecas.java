@@ -5,13 +5,21 @@
  */
 package form;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.Cache;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.Peca;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import util.HibernateUtil;
 
@@ -20,12 +28,16 @@ import util.HibernateUtil;
  * @author elena
  */
 public class CadastroPecas extends javax.swing.JFrame {
+    
+    public int codigo_peca = 0;
 
     /**
      * Creates new form Pecas
      */
     public CadastroPecas() {
         initComponents();
+        service.CadastroPecas cad = new service.CadastroPecas();
+        cad.ListaPecas(jTDescricao.getText(), (DefaultTableModel) jTableListagemCadPecas.getModel());
     }
 
     /**
@@ -47,12 +59,17 @@ public class CadastroPecas extends javax.swing.JFrame {
         jTextValorUnitario = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableListagemCadPecas = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jBSalvar = new javax.swing.JButton();
+        jBAlterar = new javax.swing.JButton();
+        jBDeletar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jTDescricao = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jBPesquisar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setName("frmCadastroPecas"); // NOI18N
+        setResizable(false);
 
         jLabel1.setText("Descrição");
 
@@ -60,9 +77,25 @@ public class CadastroPecas extends javax.swing.JFrame {
 
         jLabel4.setText("Data entrada");
 
-        jTextDataEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        try {
+            jTextDataEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         jLabel2.setText("Valor unitário");
+
+        jTextValorUnitario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
+        jTextValorUnitario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                FormataValor(evt);
+            }
+        });
+        jTextValorUnitario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextValorUnitarioActionPerformed(evt);
+            }
+        });
 
         jTableListagemCadPecas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,23 +107,62 @@ public class CadastroPecas extends javax.swing.JFrame {
             new String [] {
                 "Codigo", "Descrição", "Quantidade", "Data entrada", "Valor"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableListagemCadPecas.setUpdateSelectionOnSort(false);
+        jTableListagemCadPecas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableListagemCadPecasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableListagemCadPecas);
 
-        jButton1.setText("Incluir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBSalvar.setText("Salvar");
+        jBSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBSalvarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Alterar");
+        jBAlterar.setText("Alterar");
+        jBAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAlterarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Excluir");
+        jBDeletar.setText("Excluir");
+        jBDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBDeletarActionPerformed(evt);
+            }
+        });
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Cadastro/ Manutenção de peças");
+
+        jTDescricao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTDescricaoActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Consulta de peças:");
+
+        jBPesquisar.setText("Pesquisar");
+        jBPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPesquisarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,36 +174,36 @@ public class CadastroPecas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel1)
-                                            .addGap(56, 56, 56)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jTextQuantida, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jLabel4)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jTextDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGap(112, 112, 112))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(39, 39, 39)
-                                    .addComponent(jTextValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jTextDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jTextValorUnitario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                                        .addComponent(jTextQuantida, javax.swing.GroupLayout.Alignment.LEADING)))
+                                .addGap(0, 85, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTDescricao)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBPesquisar))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jBSalvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBAlterar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBDeletar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -139,49 +211,62 @@ public class CadastroPecas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(8, 8, 8)
                 .addComponent(jLabel5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel1)
-                        .addGap(3, 3, 3))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jTextDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextQuantida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
                     .addComponent(jLabel4)
                     .addComponent(jTextDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextQuantida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jBSalvar)
+                    .addComponent(jBAlterar)
+                    .addComponent(jBDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jBPesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    public void limparCampos() {
+        jTextDescricao.setText("");
+        jTextQuantida.setText("");
+        jTextDataEntrada.setText("");
+        jTextValorUnitario.setText("");
+    }
+
+    private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
+        service.CadastroPecas cad = new service.CadastroPecas();
         String descricao = jTextDescricao.getText();
         int qtd_estoque = Integer.parseInt(jTextQuantida.getText());
         String data_entrada = jTextDataEntrada.getText();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/YYYY");
-        Date date = null;
-//        try {
-//            date = sdf.parse(data_entrada);
-//        } catch (ParseException ex) {
-//            Logger.getLogger(CadastroPecas.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        double valor_uni = Double.parseDouble(jTextValorUnitario.getText());
         
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = null;
+        try {
+            data = formato.parse(data_entrada);
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastroPecas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String valor = jTextValorUnitario.getText();
+        valor = valor.replace(".", "").replace(".", "").replace(".", "").replace(".", "").replace(",", ".");
+        double valor_uni = Double.parseDouble(valor);
         if (descricao == "") {
             JOptionPane.showMessageDialog(this, "Preencher a descrição da peça!");
         } else if (data_entrada == null) {
@@ -189,20 +274,78 @@ public class CadastroPecas extends javax.swing.JFrame {
         } else if (valor_uni == 0.00) {
             JOptionPane.showMessageDialog(this, "Preencher o valor unitário da peça!");
         }
+        if (codigo_peca == 0) {
+            cad.salvarCadPecas(descricao, qtd_estoque, valor_uni, data);
+        } else {
+            cad.AlterarCadPecas(descricao, qtd_estoque, valor_uni, data, codigo_peca);
+            codigo_peca = 0;
+            jBAlterar.setEnabled(true);
+        }
+        limparCampos();
+        cad.ListaPecas(jTDescricao.getText(), (DefaultTableModel) jTableListagemCadPecas.getModel());
+    }//GEN-LAST:event_jBSalvarActionPerformed
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Peca cad_pecas = new Peca();
-        cad_pecas.setDescricaopeca(descricao);
-        cad_pecas.setQuantidade(qtd_estoque);
-        cad_pecas.setValor_praticado(valor_uni);
-        //cad_pecas.setData_entrada(date);
-        
-        session.getTransaction().begin();
-        session.save(cad_pecas);
-        session.getTransaction().commit();
+    private void jTextValorUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextValorUnitarioActionPerformed
 
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jTextValorUnitarioActionPerformed
+
+    private void FormataValor(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_FormataValor
+    }//GEN-LAST:event_FormataValor
+
+    private void jBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarActionPerformed
+        int linha = jTableListagemCadPecas.getSelectedRow();
+        if (linha >= 0) {
+            String codigo = String.valueOf(jTableListagemCadPecas.getValueAt(linha, 0));
+            String descricao = String.valueOf(jTableListagemCadPecas.getValueAt(linha, 1));
+            String quantidade = String.valueOf(jTableListagemCadPecas.getValueAt(linha, 2));
+            String data_entrada = String.valueOf(jTableListagemCadPecas.getValueAt(linha, 3));
+            String valor = String.valueOf(jTableListagemCadPecas.getValueAt(linha, 4));
+            codigo_peca = Integer.parseInt(codigo);
+            
+            jTextDescricao.setText(descricao);
+            jTextQuantida.setText(quantidade);
+            jTextValorUnitario.setText(valor);
+            jTextDataEntrada.setText(data_entrada);
+            
+            jBAlterar.setEnabled(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma linha da tabela!");
+        }
+    }//GEN-LAST:event_jBAlterarActionPerformed
+
+    private void jBDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDeletarActionPerformed
+        if (JOptionPane.showConfirmDialog(this, "Você está certo disso?")
+                == JOptionPane.YES_OPTION) {
+            int linha = jTableListagemCadPecas.getSelectedRow();
+            if (linha >= 0) {
+                int codigo = Integer.parseInt(
+                        String.valueOf(jTableListagemCadPecas.getValueAt(linha, 0))
+                );
+                service.CadastroPecas cad = new service.CadastroPecas();
+                cad.deletarCadPecas(codigo);
+                cad.ListaPecas(jTDescricao.getText(), (DefaultTableModel) jTableListagemCadPecas.getModel());
+                limparCampos();
+                 jBAlterar.setEnabled(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione uma linha!");
+            }
+        }
+    }//GEN-LAST:event_jBDeletarActionPerformed
+
+    private void jTableListagemCadPecasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListagemCadPecasMouseClicked
+        if (evt.getSource() == jTableListagemCadPecas && evt.getClickCount() == 2) {
+            jBAlterarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTableListagemCadPecasMouseClicked
+
+    private void jTDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTDescricaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTDescricaoActionPerformed
+
+    private void jBPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisarActionPerformed
+        service.CadastroPecas cad = new service.CadastroPecas();
+        cad.ListaPecas(jTDescricao.getText(), (DefaultTableModel) jTableListagemCadPecas.getModel());
+    }//GEN-LAST:event_jBPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,15 +384,18 @@ public class CadastroPecas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jBAlterar;
+    private javax.swing.JButton jBDeletar;
+    private javax.swing.JButton jBPesquisar;
+    private javax.swing.JButton jBSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTDescricao;
     private javax.swing.JTable jTableListagemCadPecas;
     private javax.swing.JFormattedTextField jTextDataEntrada;
     private javax.swing.JTextField jTextDescricao;

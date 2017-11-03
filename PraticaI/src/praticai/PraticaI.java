@@ -5,6 +5,9 @@
  */
 package praticai;
 
+import org.hibernate.Session;
+import util.HibernateUtil;
+
 /**
  *
  * @author matheus
@@ -14,8 +17,8 @@ public class PraticaI {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        //alteracao git
+    public static void main(String[] args) {        
+        Session session = HibernateUtil.getSessionFactory().openSession();
     }
     
 }
