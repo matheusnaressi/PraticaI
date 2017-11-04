@@ -5,6 +5,9 @@
  */
 package form;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author elena
@@ -31,28 +34,27 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabelTipoPessoa = new javax.swing.JLabel();
-        jButtonExcluir1 = new javax.swing.JButton();
+        jButtonFechar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jButtonExcluir2 = new javax.swing.JButton();
-        jButtonExcluir3 = new javax.swing.JButton();
-        jButtonExcluir4 = new javax.swing.JButton();
+        jButtonExcluir = new javax.swing.JButton();
+        jButtonSalvar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jButtonExcluir5 = new javax.swing.JButton();
+        jButtonAlterar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jComboBoxModelo = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        jTextFieldModelo = new javax.swing.JTextField();
+        jTextFieldDescricao = new javax.swing.JTextField();
+        jTextFieldPessoa = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTabelaVeiculos = new javax.swing.JTable();
+        jTextFieldPlaca1 = new javax.swing.JTextField();
 
         jTextField2.setText("jTextField2");
 
@@ -81,9 +83,14 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jLabelTipoPessoa.setText("Cadastro");
         jPanel2.add(jLabelTipoPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
 
-        jButtonExcluir1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jButtonExcluir1.setText("Fechar");
-        jPanel2.add(jButtonExcluir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 470, 100, 30));
+        jButtonFechar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jButtonFechar.setText("Fechar");
+        jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFecharActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 460, 100, 30));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -107,17 +114,18 @@ public class CadastroVeiculo extends javax.swing.JFrame {
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 510));
 
-        jButtonExcluir2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jButtonExcluir2.setText("Excluir");
-        jPanel2.add(jButtonExcluir2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 89, -1));
+        jButtonExcluir.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jButtonExcluir.setText("Excluir");
+        jPanel2.add(jButtonExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 89, -1));
 
-        jButtonExcluir3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jButtonExcluir3.setText("Incluir");
-        jPanel2.add(jButtonExcluir3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 89, -1));
-
-        jButtonExcluir4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jButtonExcluir4.setText("Salvar");
-        jPanel2.add(jButtonExcluir4, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 470, 100, 30));
+        jButtonSalvar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 89, -1));
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel11.setText("Localizar");
@@ -127,13 +135,15 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 660, 20));
 
-        jButtonExcluir5.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jButtonExcluir5.setText("Alterar");
-        jPanel2.add(jButtonExcluir5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 89, -1));
+        jButtonAlterar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jButtonAlterar.setText("Alterar");
+        jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlterarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 89, -1));
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, -1));
-
-        jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 125, -1));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -149,11 +159,11 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel12.setText("Pessoa");
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, -1));
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 130, -1));
-        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 220, -1));
-        jPanel2.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 220, -1));
+        jPanel2.add(jTextFieldModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 130, -1));
+        jPanel2.add(jTextFieldDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 220, -1));
+        jPanel2.add(jTextFieldPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 410, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTabelaVeiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -161,12 +171,13 @@ public class CadastroVeiculo extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Descrição", "Placa", "Modelo", "Pessoa"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTabelaVeiculos);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 490, 140));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 700, 120));
+        jPanel2.add(jTextFieldPlaca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 130, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -181,6 +192,23 @@ public class CadastroVeiculo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
+         dispose(); 
+    }//GEN-LAST:event_jButtonFecharActionPerformed
+
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        
+     
+
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
+        
+       
+        
+       
+    }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,12 +246,10 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonExcluir1;
-    private javax.swing.JButton jButtonExcluir2;
-    private javax.swing.JButton jButtonExcluir3;
-    private javax.swing.JButton jButtonExcluir4;
-    private javax.swing.JButton jButtonExcluir5;
-    private javax.swing.JComboBox<String> jComboBoxModelo;
+    private javax.swing.JButton jButtonAlterar;
+    private javax.swing.JButton jButtonExcluir;
+    private javax.swing.JButton jButtonFechar;
+    private javax.swing.JButton jButtonSalvar;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -239,10 +265,11 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable jTabelaVeiculos;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextFieldDescricao;
+    private javax.swing.JTextField jTextFieldModelo;
+    private javax.swing.JTextField jTextFieldPessoa;
+    private javax.swing.JTextField jTextFieldPlaca1;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,17 +5,29 @@
  */
 package form;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author elena
  */
 public class CadastroPessoa extends javax.swing.JFrame {
+    public int codigo_pessoa = 0;
 
     /**
      * Creates new form CadastroPessoa
      */
     public CadastroPessoa() {
         initComponents();
+        service.CadastroPessoa cad = new service.CadastroPessoa();
+        cad.ListaPessoa("", (DefaultTableModel) jTableTabela.getModel());
+        
     }
 
     /**
@@ -35,8 +47,8 @@ public class CadastroPessoa extends javax.swing.JFrame {
         jLabelTipoPessoa = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTabela = new javax.swing.JTable();
-        jButtonExcluir = new javax.swing.JButton();
-        jPasswordFieldSenha = new javax.swing.JPasswordField();
+        jButtonFechar = new javax.swing.JButton();
+        jPasswordSenha = new javax.swing.JPasswordField();
         jTextFieldDocumento = new javax.swing.JTextField();
         jTextFieldNome = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -48,11 +60,10 @@ public class CadastroPessoa extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabelTipoPessoa1 = new javax.swing.JLabel();
         jButtonExcluir1 = new javax.swing.JButton();
-        jButtonExcluir2 = new javax.swing.JButton();
-        jButtonExcluir3 = new javax.swing.JButton();
+        jButtonSalvar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jButtonExcluir4 = new javax.swing.JButton();
+        jButtonAlterar = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -66,10 +77,18 @@ public class CadastroPessoa extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAutoRequestFocus(false);
         setBackground(new java.awt.Color(255, 255, 255));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setFocusTraversalPolicyProvider(true);
+        setMinimumSize(new java.awt.Dimension(0, 0));
+        setName("CadastroPessoa"); // NOI18N
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setAutoscrolls(true);
+        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(117, 117, 123));
@@ -120,12 +139,17 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 700, 90));
 
-        jButtonExcluir.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jButtonExcluir.setText("Fechar");
-        jPanel2.add(jButtonExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 470, 100, 30));
+        jButtonFechar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jButtonFechar.setText("Fechar");
+        jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFecharActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 470, 100, 30));
 
-        jPasswordFieldSenha.setText("jPasswordField1");
-        jPanel2.add(jPasswordFieldSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 170, -1));
+        jPasswordSenha.setText("jPasswordField1");
+        jPanel2.add(jPasswordSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 170, -1));
         jPanel2.add(jTextFieldDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 370, -1));
 
         jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
@@ -171,15 +195,21 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
         jButtonExcluir1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jButtonExcluir1.setText("Excluir");
+        jButtonExcluir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluir1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButtonExcluir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, 89, -1));
 
-        jButtonExcluir2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jButtonExcluir2.setText("Incluir");
-        jPanel2.add(jButtonExcluir2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 89, -1));
-
-        jButtonExcluir3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jButtonExcluir3.setText("Salvar");
-        jPanel2.add(jButtonExcluir3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 470, 100, 30));
+        jButtonSalvar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 89, -1));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel3.setText("Localizar");
@@ -189,13 +219,19 @@ public class CadastroPessoa extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 660, 20));
 
-        jButtonExcluir4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jButtonExcluir4.setText("Alterar");
-        jPanel2.add(jButtonExcluir4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 89, -1));
+        jButtonAlterar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jButtonAlterar.setText("Alterar");
+        jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlterarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 89, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 510));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButtonFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFisicaActionPerformed
@@ -206,34 +242,105 @@ public class CadastroPessoa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNomeActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroPessoa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroPessoa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroPessoa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroPessoa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+      public void limparCampos() {
+        jTextFieldNome.setText("");
+        jTextFieldDocumento.setText("");
+        jPasswordSenha.setText("");
+        jRadioButtonFisica.setText("");
+        jRadioButtonJuridica.setText("");
+        
+    }
+   
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+        
+        
+        service.CadastroPessoa cad = new service.CadastroPessoa();
+        String nome = jTextFieldNome.getText();
+        String documento = jTextFieldDocumento.getText();
+        String tipopessoa = "";
+        if (!jRadioButtonFisica.isSelected()) {
+            tipopessoa = "1"; //pessoa juridica
+        } else {
+            tipopessoa = "2"; //pessoa fisica
         }
-        //</editor-fold>
+   
+        String senha = jPasswordSenha.getText();
+       
+        
+        if (nome == "") {
+            JOptionPane.showMessageDialog(this, "Preencher o campo nome!");
+        } else if (tipopessoa == "") {
+            JOptionPane.showMessageDialog(this, "Preencher o tipo de pessoa");
+        } else if (documento == "") {
+            JOptionPane.showMessageDialog(this, "Preencher o campo documento!");
+        }
+        if (codigo_pessoa == 0) {
+            cad.salvarCadPessoa(nome, documento, tipopessoa, senha);
+        } else {
+            cad.AlterarCadPessoa(nome, documento, tipopessoa, senha,codigo_pessoa);
+            codigo_pessoa = 0;
+            jButtonAlterar.setEnabled(true);
+        }
+        limparCampos();
+        cad.ListaPessoa("", (DefaultTableModel) jTableTabela.getModel());
+        
+   
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
 
-        /* Create and display the form */
+    private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
+      
+        int linha = jTableTabela.getSelectedRow();
+        if (linha >= 0) {
+            String codigo = String.valueOf(jTableTabela.getValueAt(linha, 0));
+            String nome = String.valueOf(jTableTabela.getValueAt(linha, 1));
+            String tipopessoa = String.valueOf(jTableTabela.getValueAt(linha, 2));
+            String documento = String.valueOf(jTableTabela.getValueAt(linha, 3));
+       
+            codigo_pessoa= Integer.parseInt(codigo);
+            
+            jTextFieldNome.setText(nome);
+             
+        if (tipopessoa == "1") {//pessoa juridica
+            jRadioButtonJuridica.setSelected(true);
+        } else {
+           jRadioButtonFisica.setSelected(true);
+        }
+            jTextFieldDocumento.setText(documento);
+            jButtonAlterar.setEnabled(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma linha da tabela!");
+        }
+        
+    }//GEN-LAST:event_jButtonAlterarActionPerformed
+
+    private void jButtonExcluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluir1ActionPerformed
+        
+          if (JOptionPane.showConfirmDialog(this, "Você tem certeza disso ?")
+                == JOptionPane.YES_OPTION) {
+            int linha = jTableTabela.getSelectedRow();
+            if (linha >= 0) {
+                int codigo = Integer.parseInt(
+                        String.valueOf(jTableTabela.getValueAt(linha, 0))
+                );
+                service.CadastroPessoa cad = new service.CadastroPessoa();
+                cad.deletarCadPessoa(codigo);
+                cad.ListaPessoa(jTextFieldDocumento.getText(), (DefaultTableModel) jTableTabela.getModel());
+                limparCampos();
+                 jButtonAlterar.setEnabled(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione uma linha!");
+            }
+        }
+        
+    }//GEN-LAST:event_jButtonExcluir1ActionPerformed
+
+    private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
+        dispose(); 
+    }//GEN-LAST:event_jButtonFecharActionPerformed
+
+    
+    public static void main(String args[]) {
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CadastroPessoa().setVisible(true);
@@ -242,11 +349,10 @@ public class CadastroPessoa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonExcluir;
+    private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonExcluir1;
-    private javax.swing.JButton jButtonExcluir2;
-    private javax.swing.JButton jButtonExcluir3;
-    private javax.swing.JButton jButtonExcluir4;
+    private javax.swing.JButton jButtonFechar;
+    private javax.swing.JButton jButtonSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -260,7 +366,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPasswordField jPasswordFieldSenha;
+    private javax.swing.JPasswordField jPasswordSenha;
     private javax.swing.JRadioButton jRadioButtonFisica;
     private javax.swing.JRadioButton jRadioButtonJuridica;
     private javax.swing.JScrollPane jScrollPane1;
