@@ -12,13 +12,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import service.ChamarQuandoSelecionar;
 
 /**
  *
  * @author elena
  */
 public class CadastroPessoa extends javax.swing.JFrame {
+
     public int codigo_pessoa = 0;
+    private ChamarQuandoSelecionar eventoChamaSeleciona;
 
     /**
      * Creates new form CadastroPessoa
@@ -26,8 +29,16 @@ public class CadastroPessoa extends javax.swing.JFrame {
     public CadastroPessoa() {
         initComponents();
         service.CadastroPessoa cad = new service.CadastroPessoa();
+        jButtonSelecionar.setVisible(false);
+
         cad.ListaPessoa("", (DefaultTableModel) jTableTabela.getModel());
-        
+
+    }
+
+    public CadastroPessoa(ChamarQuandoSelecionar chamarSelecionar) {
+        this();
+        jButtonSelecionar.setVisible(true);
+        this.eventoChamaSeleciona = chamarSelecionar;
     }
 
     /**
@@ -47,7 +58,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
         jLabelTipoPessoa = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTabela = new javax.swing.JTable();
-        jButtonFechar = new javax.swing.JButton();
+        jButtonSelecionar = new javax.swing.JButton();
         jPasswordSenha = new javax.swing.JPasswordField();
         jTextFieldDocumento = new javax.swing.JTextField();
         jTextFieldNome = new javax.swing.JTextField();
@@ -64,6 +75,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jButtonAlterar = new javax.swing.JButton();
+        jButtonFechar1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -81,7 +93,6 @@ public class CadastroPessoa extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFocusTraversalPolicyProvider(true);
-        setMinimumSize(new java.awt.Dimension(0, 0));
         setName("CadastroPessoa"); // NOI18N
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -139,16 +150,14 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 700, 90));
 
-        jButtonFechar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jButtonFechar.setText("Fechar");
-        jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSelecionar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jButtonSelecionar.setText("Selecionar");
+        jButtonSelecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFecharActionPerformed(evt);
+                jButtonSelecionarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 470, 100, 30));
-
-        jPasswordSenha.setText("jPasswordField1");
+        jPanel2.add(jButtonSelecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 470, 100, 30));
         jPanel2.add(jPasswordSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 170, -1));
         jPanel2.add(jTextFieldDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 370, -1));
 
@@ -228,7 +237,16 @@ public class CadastroPessoa extends javax.swing.JFrame {
         });
         jPanel2.add(jButtonAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 89, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, -1));
+        jButtonFechar1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jButtonFechar1.setText("Fechar");
+        jButtonFechar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFechar1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonFechar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 470, 100, 30));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -242,18 +260,17 @@ public class CadastroPessoa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNomeActionPerformed
 
-      public void limparCampos() {
+    public void limparCampos() {
         jTextFieldNome.setText("");
         jTextFieldDocumento.setText("");
         jPasswordSenha.setText("");
-        jRadioButtonFisica.setText("");
-        jRadioButtonJuridica.setText("");
-        
+        jRadioButtonFisica.setSelected(false);
+        jRadioButtonJuridica.setSelected(false);
+
     }
-   
+
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        
-        
+
         service.CadastroPessoa cad = new service.CadastroPessoa();
         String nome = jTextFieldNome.getText();
         String documento = jTextFieldDocumento.getText();
@@ -263,10 +280,9 @@ public class CadastroPessoa extends javax.swing.JFrame {
         } else {
             tipopessoa = "2"; //pessoa fisica
         }
-   
+
         String senha = jPasswordSenha.getText();
-       
-        
+
         if (nome == "") {
             JOptionPane.showMessageDialog(this, "Preencher o campo nome!");
         } else if (tipopessoa == "") {
@@ -277,45 +293,45 @@ public class CadastroPessoa extends javax.swing.JFrame {
         if (codigo_pessoa == 0) {
             cad.salvarCadPessoa(nome, documento, tipopessoa, senha);
         } else {
-            cad.AlterarCadPessoa(nome, documento, tipopessoa, senha,codigo_pessoa);
+            cad.alterarCadPessoa(nome, documento, tipopessoa, senha, codigo_pessoa);
             codigo_pessoa = 0;
             jButtonAlterar.setEnabled(true);
         }
         limparCampos();
         cad.ListaPessoa("", (DefaultTableModel) jTableTabela.getModel());
-        
-   
+
+
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-      
+
         int linha = jTableTabela.getSelectedRow();
         if (linha >= 0) {
             String codigo = String.valueOf(jTableTabela.getValueAt(linha, 0));
             String nome = String.valueOf(jTableTabela.getValueAt(linha, 1));
             String tipopessoa = String.valueOf(jTableTabela.getValueAt(linha, 2));
             String documento = String.valueOf(jTableTabela.getValueAt(linha, 3));
-       
-            codigo_pessoa= Integer.parseInt(codigo);
-            
+
+            codigo_pessoa = Integer.parseInt(codigo);
+
             jTextFieldNome.setText(nome);
-             
-        if (tipopessoa == "1") {//pessoa juridica
-            jRadioButtonJuridica.setSelected(true);
-        } else {
-           jRadioButtonFisica.setSelected(true);
-        }
+
+            if (tipopessoa == "1") {//pessoa juridica
+                jRadioButtonJuridica.setSelected(true);
+            } else {
+                jRadioButtonFisica.setSelected(true);
+            }
             jTextFieldDocumento.setText(documento);
             jButtonAlterar.setEnabled(false);
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma linha da tabela!");
         }
-        
+
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonExcluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluir1ActionPerformed
-        
-          if (JOptionPane.showConfirmDialog(this, "Você tem certeza disso ?")
+
+        if (JOptionPane.showConfirmDialog(this, "Você tem certeza disso ?")
                 == JOptionPane.YES_OPTION) {
             int linha = jTableTabela.getSelectedRow();
             if (linha >= 0) {
@@ -326,21 +342,33 @@ public class CadastroPessoa extends javax.swing.JFrame {
                 cad.deletarCadPessoa(codigo);
                 cad.ListaPessoa(jTextFieldDocumento.getText(), (DefaultTableModel) jTableTabela.getModel());
                 limparCampos();
-                 jButtonAlterar.setEnabled(true);
+                jButtonAlterar.setEnabled(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Selecione uma linha!");
             }
         }
-        
+
     }//GEN-LAST:event_jButtonExcluir1ActionPerformed
 
-    private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
-        dispose(); 
-    }//GEN-LAST:event_jButtonFecharActionPerformed
+    private void jButtonFechar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFechar1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButtonFechar1ActionPerformed
 
-    
+    private void jButtonSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarActionPerformed
+        int linha = jTableTabela.getSelectedRow();
+        if (linha >= 0) {
+            int codigo = Integer.parseInt(
+                    String.valueOf(jTableTabela.getValueAt(linha, 0))
+            );
+            eventoChamaSeleciona.ReceberValor(codigo);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma linha!");
+        }
+    }//GEN-LAST:event_jButtonSelecionarActionPerformed
+
     public static void main(String args[]) {
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CadastroPessoa().setVisible(true);
@@ -351,8 +379,9 @@ public class CadastroPessoa extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonExcluir1;
-    private javax.swing.JButton jButtonFechar;
+    private javax.swing.JButton jButtonFechar1;
     private javax.swing.JButton jButtonSalvar;
+    private javax.swing.JButton jButtonSelecionar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

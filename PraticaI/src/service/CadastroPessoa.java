@@ -32,7 +32,7 @@ public class CadastroPessoa {
         session.save(cad_pessoa);
         session.getTransaction().commit();
    }
-   public void AlterarCadPessoa(String nome, String documento, String tipopessoa, String senha,int codigo_pessoa){
+   public void alterarCadPessoa(String nome, String documento, String tipopessoa, String senha,int codigo_pessoa){
    
         Session session = HibernateUtil.getSessionFactory().openSession();
         Pessoa cad_pessoa = new Pessoa();

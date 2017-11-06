@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -15,9 +17,16 @@ public class Veiculo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "idveiculo")
     private int idveiculo;
-    private int modeloveiculo_idmodeloveiculo;
-    private int pessoa_id;
-    private int idmodeloveiculo;
+
+    @ManyToOne
+    @JoinColumn(name = "modeloveiculo_idmodeloveiculo")
+    private ModeloVeiculo modelo;
+
+    @ManyToOne
+    @JoinColumn(name = "pessoa_id")
+    private Pessoa pessoa;
+
+    private String nomemodelo;
     private String placaveiculo;
 
     public int getIdveiculo() {
@@ -28,28 +37,28 @@ public class Veiculo implements Serializable {
         this.idveiculo = idveiculo;
     }
 
-    public int getModeloveiculo_idmodeloveiculo() {
-        return modeloveiculo_idmodeloveiculo;
+    public ModeloVeiculo getModelo() {
+        return modelo;
     }
 
-    public void setModeloveiculo_idmodeloveiculo(int modeloveiculo_idmodeloveiculo) {
-        this.modeloveiculo_idmodeloveiculo = modeloveiculo_idmodeloveiculo;
+    public void setModelo(ModeloVeiculo modelo) {
+        this.modelo = modelo;
     }
 
-    public int getPessoa_id() {
-        return pessoa_id;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setPessoa_id(int pessoa_id) {
-        this.pessoa_id = pessoa_id;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
-    public int getIdmodeloveiculo() {
-        return idmodeloveiculo;
+    public String getNomemodelo() {
+        return nomemodelo;
     }
 
-    public void setIdmodeloveiculo(int idmodeloveiculo) {
-        this.idmodeloveiculo = idmodeloveiculo;
+    public void setNomemodelo(String nomemodelo) {
+        this.nomemodelo = nomemodelo;
     }
 
     public String getPlacaveiculo() {
