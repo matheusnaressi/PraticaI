@@ -17,7 +17,7 @@ import util.HibernateUtil;
 
 /**
  *
- * @author elena
+ * @author naressi
  */
 public class CadastroPecas {
 
