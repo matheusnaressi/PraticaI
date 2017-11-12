@@ -76,7 +76,6 @@ public class CadastroPecas extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextDataEntrada = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("frmCadastroPecas"); // NOI18N
         setResizable(false);
 

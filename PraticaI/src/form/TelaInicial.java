@@ -16,6 +16,7 @@ public class TelaInicial extends javax.swing.JFrame {
      */
     public TelaInicial() {
         initComponents();
+        jLabel2.setText("Usuário Logado: "+Login.logado.getNome());
     }
 
     /**
@@ -33,22 +34,56 @@ public class TelaInicial extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jButtonConsultas = new javax.swing.JButton();
-        jPanel8 = new javax.swing.JPanel();
-        jButtonLancamentos = new javax.swing.JButton();
-        jPanel9 = new javax.swing.JPanel();
-        jButtonCadastros = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jPanel16 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        jPanel20 = new javax.swing.JPanel();
+        jPanel21 = new javax.swing.JPanel();
+        jButtonVeiculo = new javax.swing.JButton();
+        jPanel18 = new javax.swing.JPanel();
+        jPanel19 = new javax.swing.JPanel();
+        jButtonHistoricoCliente = new javax.swing.JButton();
+        jPanel22 = new javax.swing.JPanel();
+        jPanel23 = new javax.swing.JPanel();
+        jPanel24 = new javax.swing.JPanel();
+        jPanel25 = new javax.swing.JPanel();
+        jButtonPessoa = new javax.swing.JButton();
+        jPanel26 = new javax.swing.JPanel();
+        jPanel27 = new javax.swing.JPanel();
+        jPanel28 = new javax.swing.JPanel();
+        jPanel29 = new javax.swing.JPanel();
+        jButtonTipoServico = new javax.swing.JButton();
+        jPanel30 = new javax.swing.JPanel();
+        jPanel31 = new javax.swing.JPanel();
+        jButtonPecas1 = new javax.swing.JButton();
+        jPanel32 = new javax.swing.JPanel();
+        jPanel33 = new javax.swing.JPanel();
+        jButtonOrdemServico1 = new javax.swing.JButton();
+        jPanel34 = new javax.swing.JPanel();
+        jPanel35 = new javax.swing.JPanel();
+        jButtonReimprimiror = new javax.swing.JButton();
+        jPanel38 = new javax.swing.JPanel();
+        jPanel39 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jPanel40 = new javax.swing.JPanel();
+        jPanel41 = new javax.swing.JPanel();
+        jButtonHistoricoVeiculo = new javax.swing.JButton();
+        jPanel42 = new javax.swing.JPanel();
+        jPanel43 = new javax.swing.JPanel();
+        jButtonConfiguracoes = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -63,95 +98,355 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 51, 102));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(29, 31, 39));
+        jPanel3.setBackground(new java.awt.Color(1, 50, 67));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 710));
 
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\elena\\Desktop\\a\\Listrinhas.png")); // NOI18N
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 40, 40));
-
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\elena\\Desktop\\a\\Configurações.png")); // NOI18N
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, -1, -1));
-
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\elena\\Desktop\\a\\Informação.png")); // NOI18N
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 50, 50));
-
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 500));
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 500));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 710));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel5.setBackground(new java.awt.Color(204, 0, 51));
+        jPanel5.setBackground(new java.awt.Color(51, 110, 123));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("JV Mecânica e Solda LTDA - ME");
-        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, 50));
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, 50));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("JV Mecânica e Solda LTDA - ME");
-        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 550, 50));
+        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 550, 50));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 800, 130));
-
-        jPanel6.setBackground(new java.awt.Color(117, 117, 123));
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 710, 30));
-
-        jPanel7.setBackground(new java.awt.Color(117, 117, 123));
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButtonConsultas.setText("Consultas");
-        jPanel7.add(jButtonConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 60, 109, 30));
-
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 250, 230, 150));
-
-        jPanel8.setBackground(new java.awt.Color(117, 117, 123));
-        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButtonLancamentos.setText("Lançamentos");
-        jPanel8.add(jButtonLancamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 60, 109, 30));
-
-        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 230, 150));
-
-        jPanel9.setBackground(new java.awt.Color(117, 117, 123));
-        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButtonCadastros.setBackground(new java.awt.Color(106, 115, 145));
-        jButtonCadastros.setText("Cadastros");
-        jButtonCadastros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCadastrosActionPerformed(evt);
-            }
-        });
-        jPanel9.add(jButtonCadastros, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 110, 30));
-
-        jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 230, 150));
-
-        jLabel3.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Desktop");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1320, 160));
 
         jLabel2.setBackground(new java.awt.Color(51, 51, 51));
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("User");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, -1, -1));
+        jLabel2.setText("Usuário Logado ");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 0, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 800, 500));
+        jPanel11.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Configurações");
+        jPanel11.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 210, 40));
+
+        jPanel1.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 240, 240, 40));
+
+        jPanel14.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Lançamentos");
+        jPanel14.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 200, 40));
+
+        jPanel1.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 240, 40));
+
+        jPanel15.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Consultas");
+        jPanel15.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 180, 40));
+
+        jPanel1.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 240, 240, 40));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 560, -1, -1));
+
+        jPanel12.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Cadastros");
+        jPanel12.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 170, 40));
+
+        jPanel1.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 250, 40));
+
+        jPanel16.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel17.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel16.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, 240, 70));
+
+        jPanel20.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel21.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel21.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel20.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, 240, 70));
+
+        jPanel16.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 250, 80));
+
+        jButtonVeiculo.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jButtonVeiculo.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Veiculo.png"))); // NOI18N
+        jButtonVeiculo.setText("Veículos");
+        jButtonVeiculo.setContentAreaFilled(false);
+        jButtonVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVeiculoActionPerformed(evt);
+            }
+        });
+        jPanel16.add(jButtonVeiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 80));
+
+        jPanel1.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 570, 250, 80));
+
+        jPanel18.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel19.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel18.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, 240, 70));
+
+        jButtonHistoricoCliente.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jButtonHistoricoCliente.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonHistoricoCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Historicocliente.png"))); // NOI18N
+        jButtonHistoricoCliente.setText("Historico de Pessoas");
+        jButtonHistoricoCliente.setContentAreaFilled(false);
+        jButtonHistoricoCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHistoricoClienteActionPerformed(evt);
+            }
+        });
+        jPanel18.add(jButtonHistoricoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 80));
+
+        jPanel1.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 300, 240, 80));
+
+        jPanel22.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel22.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel23.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel23.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel22.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, 240, 70));
+
+        jPanel24.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel24.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel25.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel25.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel24.add(jPanel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, 240, 70));
+
+        jPanel22.add(jPanel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 250, 80));
+
+        jButtonPessoa.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonPessoa.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jButtonPessoa.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonPessoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/CadastroPessoa.png"))); // NOI18N
+        jButtonPessoa.setText("Pessoas");
+        jButtonPessoa.setContentAreaFilled(false);
+        jButtonPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPessoaActionPerformed(evt);
+            }
+        });
+        jPanel22.add(jButtonPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 80));
+
+        jPanel1.add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 250, 80));
+
+        jPanel26.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel26.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel27.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel27.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel26.add(jPanel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, 240, 70));
+
+        jPanel28.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel28.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel29.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel29.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel28.add(jPanel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, 240, 70));
+
+        jPanel26.add(jPanel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 250, 80));
+
+        jButtonTipoServico.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonTipoServico.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jButtonTipoServico.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonTipoServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/TipoServico.png"))); // NOI18N
+        jButtonTipoServico.setText("Tipo de Serviço ");
+        jButtonTipoServico.setContentAreaFilled(false);
+        jButtonTipoServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTipoServicoActionPerformed(evt);
+            }
+        });
+        jPanel26.add(jButtonTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 80));
+
+        jPanel1.add(jPanel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 250, 80));
+
+        jPanel30.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel30.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel31.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel31.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel30.add(jPanel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, 240, 70));
+
+        jButtonPecas1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jButtonPecas1.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonPecas1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Pecas.png"))); // NOI18N
+        jButtonPecas1.setText("Peças");
+        jButtonPecas1.setContentAreaFilled(false);
+        jButtonPecas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPecas1ActionPerformed(evt);
+            }
+        });
+        jPanel30.add(jButtonPecas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 80));
+
+        jPanel1.add(jPanel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 250, 80));
+
+        jPanel32.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel32.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel33.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel33.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel32.add(jPanel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, 240, 70));
+
+        jButtonOrdemServico1.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jButtonOrdemServico1.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonOrdemServico1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Ordem.png"))); // NOI18N
+        jButtonOrdemServico1.setText("Ordem de Serviço");
+        jButtonOrdemServico1.setContentAreaFilled(false);
+        jButtonOrdemServico1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOrdemServico1ActionPerformed(evt);
+            }
+        });
+        jPanel32.add(jButtonOrdemServico1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 80));
+
+        jPanel1.add(jPanel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, 240, 80));
+
+        jPanel34.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel34.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel35.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel35.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel34.add(jPanel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, 240, 70));
+
+        jButtonReimprimiror.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jButtonReimprimiror.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonReimprimiror.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/reimprimir.png"))); // NOI18N
+        jButtonReimprimiror.setText("Reimprimir OR");
+        jButtonReimprimiror.setContentAreaFilled(false);
+        jButtonReimprimiror.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReimprimirorActionPerformed(evt);
+            }
+        });
+        jPanel34.add(jButtonReimprimiror, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 80));
+
+        jPanel1.add(jPanel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 240, 80));
+
+        jPanel38.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel38.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel39.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel39.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel38.add(jPanel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, 240, 70));
+
+        jButton1.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Ajuda.png"))); // NOI18N
+        jButton1.setText("Ajuda do sistema");
+        jButton1.setContentAreaFilled(false);
+        jPanel38.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 80));
+
+        jPanel1.add(jPanel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 390, 240, 80));
+
+        jPanel40.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel40.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel41.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel41.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel40.add(jPanel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, 240, 70));
+
+        jButtonHistoricoVeiculo.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jButtonHistoricoVeiculo.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonHistoricoVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/HistoricoVeiculo.png"))); // NOI18N
+        jButtonHistoricoVeiculo.setText("Histórico de Veículos");
+        jButtonHistoricoVeiculo.setContentAreaFilled(false);
+        jButtonHistoricoVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHistoricoVeiculoActionPerformed(evt);
+            }
+        });
+        jPanel40.add(jButtonHistoricoVeiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 80));
+
+        jPanel1.add(jPanel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 390, 240, 80));
+
+        jPanel42.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel42.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel43.setBackground(new java.awt.Color(51, 110, 123));
+        jPanel43.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel42.add(jPanel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, 240, 70));
+
+        jButtonConfiguracoes.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jButtonConfiguracoes.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonConfiguracoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/Configuração.png"))); // NOI18N
+        jButtonConfiguracoes.setText("Configurações");
+        jButtonConfiguracoes.setContentAreaFilled(false);
+        jButtonConfiguracoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfiguracoesActionPerformed(evt);
+            }
+        });
+        jPanel42.add(jButtonConfiguracoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 80));
+
+        jPanel1.add(jPanel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 300, 240, 80));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 1320, 710));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonCadastrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrosActionPerformed
+    private void jButtonConfiguracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfiguracoesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonCadastrosActionPerformed
+    }//GEN-LAST:event_jButtonConfiguracoesActionPerformed
+
+    private void jButtonPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPessoaActionPerformed
+        CadastroPessoa pessoa = new CadastroPessoa();
+        pessoa.show();
+  
+    }//GEN-LAST:event_jButtonPessoaActionPerformed
+
+    private void jButtonTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTipoServicoActionPerformed
+        CadastroTipoServico tiposervico = new CadastroTipoServico();
+        tiposervico.show();
+    }//GEN-LAST:event_jButtonTipoServicoActionPerformed
+
+    private void jButtonPecas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPecas1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonPecas1ActionPerformed
+
+    private void jButtonHistoricoVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHistoricoVeiculoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonHistoricoVeiculoActionPerformed
+
+    private void jButtonHistoricoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHistoricoClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonHistoricoClienteActionPerformed
+
+    private void jButtonReimprimirorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReimprimirorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonReimprimirorActionPerformed
+
+    private void jButtonVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVeiculoActionPerformed
+        CadastroVeiculo veiculo = new CadastroVeiculo();
+        veiculo.show();
+
+    }//GEN-LAST:event_jButtonVeiculoActionPerformed
+
+    private void jButtonOrdemServico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdemServico1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonOrdemServico1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,25 +499,59 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCadastros;
-    private javax.swing.JButton jButtonConsultas;
-    private javax.swing.JButton jButtonLancamentos;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonConfiguracoes;
+    private javax.swing.JButton jButtonHistoricoCliente;
+    private javax.swing.JButton jButtonHistoricoVeiculo;
+    private javax.swing.JButton jButtonOrdemServico1;
+    private javax.swing.JButton jButtonPecas1;
+    private javax.swing.JButton jButtonPessoa;
+    private javax.swing.JButton jButtonReimprimiror;
+    private javax.swing.JButton jButtonTipoServico;
+    private javax.swing.JButton jButtonVeiculo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
+    private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel25;
+    private javax.swing.JPanel jPanel26;
+    private javax.swing.JPanel jPanel27;
+    private javax.swing.JPanel jPanel28;
+    private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel30;
+    private javax.swing.JPanel jPanel31;
+    private javax.swing.JPanel jPanel32;
+    private javax.swing.JPanel jPanel33;
+    private javax.swing.JPanel jPanel34;
+    private javax.swing.JPanel jPanel35;
+    private javax.swing.JPanel jPanel38;
+    private javax.swing.JPanel jPanel39;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel40;
+    private javax.swing.JPanel jPanel41;
+    private javax.swing.JPanel jPanel42;
+    private javax.swing.JPanel jPanel43;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea jTextArea1;
