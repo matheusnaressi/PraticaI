@@ -140,7 +140,7 @@ public class CadastroPecas extends javax.swing.JFrame {
                 jButtonFecharActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 390, 100, 30));
+        jPanel2.add(jButtonFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 390, 100, 30));
 
         jTableListagemCadPecas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
