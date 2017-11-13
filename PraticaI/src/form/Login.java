@@ -48,6 +48,7 @@ public class Login extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -62,39 +63,47 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(51, 110, 123));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(160, 186, 173));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(jTextFieldUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 260, 40));
-        jPanel3.add(jPasswordSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 260, 40));
+
+        jTextFieldUsuario.setDisabledTextColor(new java.awt.Color(51, 110, 123));
+        jPanel3.add(jTextFieldUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 280, 40));
+
+        jPasswordSenha.setDisabledTextColor(new java.awt.Color(51, 110, 123));
+        jPanel3.add(jPasswordSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 280, 40));
 
         jButton1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jButton1.setText("LOGIN");
+        jButton1.setText("LOGAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 190, 30));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 200, 30));
 
         jLabel7.setBackground(new java.awt.Color(0, 0, 0));
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("Usuário");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 180, 20));
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 180, 20));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Senha");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 180, 20));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 180, 20));
 
-        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("JV Mecânica e Solda LTDA - ME");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 300, 50));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/User.png"))); // NOI18N
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 100, 90));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 320, 290));
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(51, 110, 123));
+        jLabel6.setText("JV Mecânica e Solda LTDA - ME");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 300, 50));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 430));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 320, 380));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -152,6 +161,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
