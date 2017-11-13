@@ -28,7 +28,7 @@ import util.HibernateUtil;
  * @author naressi
  */
 public class CadastroPecas extends javax.swing.JFrame {
-    
+
     public int codigo_peca = 0;
 
     /**
@@ -207,7 +207,7 @@ public class CadastroPecas extends javax.swing.JFrame {
         jLabel2.setText("Valor unitário");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
 
-        jTextValorUnitario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
+        jTextValorUnitario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
         jTextValorUnitario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 FormataValor(evt);
@@ -218,12 +218,12 @@ public class CadastroPecas extends javax.swing.JFrame {
                 jTextValorUnitarioActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextValorUnitario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 170, 20));
+        jPanel2.add(jTextValorUnitario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 170, 30));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel1.setText("Descrição");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
-        jPanel2.add(jTextDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 670, -1));
+        jPanel2.add(jTextDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 610, -1));
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel4.setText("Data entrada");
@@ -268,7 +268,7 @@ public class CadastroPecas extends javax.swing.JFrame {
         String descricao = jTextDescricao.getText();
         int qtd_estoque = Integer.parseInt(jTextQuantida.getText());
         String data_entrada = jTextDataEntrada.getText();
-        
+
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date data = null;
         try {
@@ -278,23 +278,24 @@ public class CadastroPecas extends javax.swing.JFrame {
         }
         String valor = jTextValorUnitario.getText();
         valor = valor.replace(".", "").replace(".", "").replace(".", "").replace(".", "").replace(",", ".");
-        double valor_uni = Double.parseDouble(valor);
-        if (descricao == "") {
+        if ("".equals(descricao)) {
             JOptionPane.showMessageDialog(this, "Preencher a descrição da peça!");
         } else if (data_entrada == null) {
             JOptionPane.showMessageDialog(this, "Preencher a data de entrada da peça!");
-        } else if (valor_uni == 0.00) {
+        } else if ("".equals(valor)) {
             JOptionPane.showMessageDialog(this, "Preencher o valor unitário da peça!");
-        }
-        if (codigo_peca == 0) {
-            cad.salvarCadPecas(descricao, qtd_estoque, valor_uni, data);
         } else {
-            cad.AlterarCadPecas(descricao, qtd_estoque, valor_uni, data, codigo_peca);
-            codigo_peca = 0;
-            jBAlterar.setEnabled(true);
+            double valor_uni = Double.parseDouble(valor);
+            if (codigo_peca == 0) {
+                cad.salvarCadPecas(descricao, qtd_estoque, valor_uni, data);
+            } else {
+                cad.AlterarCadPecas(descricao, qtd_estoque, valor_uni, data, codigo_peca);
+                codigo_peca = 0;
+                jBAlterar.setEnabled(true);
+            }
+            limparCampos();
+            cad.ListaPecas(jTDescricao.getText(), (DefaultTableModel) jTableListagemCadPecas.getModel());
         }
-        limparCampos();
-        cad.ListaPecas(jTDescricao.getText(), (DefaultTableModel) jTableListagemCadPecas.getModel());
     }//GEN-LAST:event_jBSalvarActionPerformed
 
     private void jTextValorUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextValorUnitarioActionPerformed
@@ -313,12 +314,12 @@ public class CadastroPecas extends javax.swing.JFrame {
             String data_entrada = String.valueOf(jTableListagemCadPecas.getValueAt(linha, 3));
             String valor = String.valueOf(jTableListagemCadPecas.getValueAt(linha, 4));
             codigo_peca = Integer.parseInt(codigo);
-            
+
             jTextDescricao.setText(descricao);
             jTextQuantida.setText(quantidade);
             jTextValorUnitario.setText(valor);
             jTextDataEntrada.setText(data_entrada);
-            
+
             jBAlterar.setEnabled(false);
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma linha da tabela!");
@@ -337,7 +338,7 @@ public class CadastroPecas extends javax.swing.JFrame {
                 cad.deletarCadPecas(codigo);
                 cad.ListaPecas(jTDescricao.getText(), (DefaultTableModel) jTableListagemCadPecas.getModel());
                 limparCampos();
-                 jBAlterar.setEnabled(true);
+                jBAlterar.setEnabled(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Selecione uma linha!");
             }

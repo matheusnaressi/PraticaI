@@ -69,7 +69,7 @@ public class CadastroTipoServico extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setAutoscrolls(true);
@@ -213,6 +213,7 @@ public class CadastroTipoServico extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
@@ -328,21 +329,16 @@ public class CadastroTipoServico extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAlterar;
     private javax.swing.JButton jBExcluir;
-    private javax.swing.JButton jBPesquisar;
     private javax.swing.JButton jBSalvar;
     private javax.swing.JButton jButtonFechar;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelTipoPessoa;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTDescricao;
-    private javax.swing.JTextField jTDescricao1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableTipoServico;
     private javax.swing.JToggleButton jToggleButton1;
