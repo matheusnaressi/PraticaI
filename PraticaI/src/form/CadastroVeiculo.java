@@ -54,10 +54,18 @@ public class CadastroVeiculo extends javax.swing.JFrame {
 
         jTextField2 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabelTipoPessoa = new javax.swing.JLabel();
         jButtonFechar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jButtonExcluir = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         jButtonAlterar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -70,11 +78,8 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jTextFieldPlaca1 = new javax.swing.JTextField();
         jComboBoxModelo = new javax.swing.JComboBox<>();
         jToggleButtonPessoa = new javax.swing.JToggleButton();
-        jPanel3 = new javax.swing.JPanel();
-        jBPesquisar = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
-        jTextFieldLista1 = new javax.swing.JTextField();
-        jLabelTipoPessoa1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldLista = new javax.swing.JTextField();
 
         jTextField2.setText("jTextField2");
 
@@ -87,6 +92,26 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel3.setBackground(new java.awt.Color(117, 117, 123));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 740, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 740, 60));
+
+        jLabelTipoPessoa.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabelTipoPessoa.setForeground(new java.awt.Color(204, 0, 51));
+        jLabelTipoPessoa.setText("Cadastro");
+        jPanel2.add(jLabelTipoPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
         jButtonFechar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jButtonFechar.setText("Fechar");
         jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -94,12 +119,29 @@ public class CadastroVeiculo extends javax.swing.JFrame {
                 jButtonFecharActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 420, 100, 30));
+        jPanel2.add(jButtonFechar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 460, 100, 30));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel5.setText("Modelo");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
+
+        jPanel4.setBackground(new java.awt.Color(29, 31, 39));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\elena\\Desktop\\a\\Listrinhas.png")); // NOI18N
+        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 40, 40));
+
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\elena\\Desktop\\a\\Configurações.png")); // NOI18N
+        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, -1, -1));
+
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setIcon(new javax.swing.ImageIcon("C:\\Users\\elena\\Desktop\\a\\Informação.png")); // NOI18N
+        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 50, 50));
+
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 510));
 
         jButtonExcluir.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jButtonExcluir.setText("Excluir");
@@ -108,7 +150,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
                 jButtonExcluirActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 240, 110, -1));
+        jPanel2.add(jButtonExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 89, -1));
 
         jButtonSalvar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jButtonSalvar.setText("Salvar");
@@ -117,7 +159,15 @@ public class CadastroVeiculo extends javax.swing.JFrame {
                 jButtonSalvarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, 110, -1));
+        jPanel2.add(jButtonSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 89, -1));
+
+        jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel11.setText("Localizar");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
+
+        jSeparator1.setBackground(new java.awt.Color(29, 31, 39));
+        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 660, 20));
 
         jButtonAlterar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jButtonAlterar.setText("Alterar");
@@ -126,24 +176,24 @@ public class CadastroVeiculo extends javax.swing.JFrame {
                 jButtonAlterarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 240, 110, -1));
+        jPanel2.add(jButtonAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 89, -1));
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, -1));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel6.setText("Descrição ");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel7.setText("Placa");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, -1, -1));
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel12.setText("Pessoa");
-        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
-        jPanel2.add(jTextFieldDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 330, -1));
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, -1));
+        jPanel2.add(jTextFieldDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 220, -1));
 
         jTextFieldPessoa.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -154,7 +204,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        jPanel2.add(jTextFieldPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 330, -1));
+        jPanel2.add(jTextFieldPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 410, -1));
 
         jTabelaVeiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -169,8 +219,8 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTabelaVeiculos);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 860, 120));
-        jPanel2.add(jTextFieldPlaca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 170, -1));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 700, 120));
+        jPanel2.add(jTextFieldPlaca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 130, -1));
 
         jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxModelo.addActionListener(new java.awt.event.ActionListener() {
@@ -178,7 +228,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
                 jComboBoxModeloActionPerformed(evt);
             }
         });
-        jPanel2.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 330, -1));
+        jPanel2.add(jComboBoxModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 220, -1));
 
         jToggleButtonPessoa.setText("...");
         jToggleButtonPessoa.addActionListener(new java.awt.event.ActionListener() {
@@ -186,76 +236,29 @@ public class CadastroVeiculo extends javax.swing.JFrame {
                 jToggleButtonPessoaActionPerformed(evt);
             }
         });
-        jPanel2.add(jToggleButtonPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 70, -1));
+        jPanel2.add(jToggleButtonPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 200, 70, -1));
 
-        jPanel3.setBackground(new java.awt.Color(51, 110, 123));
+        jLabel1.setText("Listar");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, -1, -1));
 
-        jBPesquisar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jBPesquisar.setForeground(new java.awt.Color(51, 51, 51));
-        jBPesquisar.setText("Pesquisar");
-        jBPesquisar.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBPesquisarActionPerformed(evt);
+                jTextFieldListaActionPerformed(evt);
             }
         });
-
-        jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Consulta de veículos:");
-
-        jTextFieldLista1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldLista1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel13)
-                .addGap(654, 654, 654)
-                .addComponent(jBPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jTextFieldLista1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBPesquisar)
-                    .addComponent(jLabel13))
-                .addContainerGap(14, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jTextFieldLista1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 50));
-
-        jLabelTipoPessoa1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabelTipoPessoa1.setForeground(new java.awt.Color(51, 110, 123));
-        jLabelTipoPessoa1.setText("Cadastro de Veículos");
-        jPanel2.add(jLabelTipoPessoa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+        jPanel2.add(jTextFieldLista, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 590, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -338,6 +341,13 @@ public class CadastroVeiculo extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
+    private void jTextFieldListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldListaActionPerformed
+        service.CadastroVeiculo cad = new service.CadastroVeiculo();
+        cad.ListaVeiculo(jTextFieldDescricao.getText(), (DefaultTableModel) jTabelaVeiculos.getModel());
+
+
+    }//GEN-LAST:event_jTextFieldListaActionPerformed
+
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         service.CadastroVeiculo cad = new service.CadastroVeiculo();
         List<ModeloVeiculo> listaVeiculo = cad.listaModelos();
@@ -359,15 +369,6 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         });
         form.setVisible(true);
     }//GEN-LAST:event_jToggleButtonPessoaActionPerformed
-
-    private void jBPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisarActionPerformed
-        service.CadastroVeiculo cad = new service.CadastroVeiculo();
-        cad.ListaVeiculo(jTextFieldDescricao.getText(), (DefaultTableModel) jTabelaVeiculos.getModel());
-    }//GEN-LAST:event_jBPesquisarActionPerformed
-
-    private void jTextFieldLista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLista1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldLista1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -405,26 +406,31 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBPesquisar;
     private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonFechar;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JComboBox<String> jComboBoxModelo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabelTipoPessoa1;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelTipoPessoa;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTabelaVeiculos;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextFieldDescricao;
-    private javax.swing.JTextField jTextFieldLista1;
+    private javax.swing.JTextField jTextFieldLista;
     private javax.swing.JTextField jTextFieldPessoa;
     private javax.swing.JTextField jTextFieldPlaca1;
     private javax.swing.JToggleButton jToggleButtonPessoa;
