@@ -125,7 +125,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableTabela);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 700, 90));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 860, 90));
 
         jButtonSelecionar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jButtonSelecionar.setText("Selecionar");
@@ -134,7 +134,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
                 jButtonSelecionarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonSelecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 360, 100, 30));
+        jPanel2.add(jButtonSelecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 350, 100, 30));
         jPanel2.add(jPasswordSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 170, -1));
         jPanel2.add(jTextFieldDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 370, -1));
 
@@ -196,7 +196,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
                 jButtonFechar1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonFechar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 360, 100, 30));
+        jPanel2.add(jButtonFechar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 350, 100, 30));
 
         jPanel3.setBackground(new java.awt.Color(51, 110, 123));
 
