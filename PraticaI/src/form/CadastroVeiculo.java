@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import model.ModeloVeiculo;
 import model.Veiculo;
 import service.ChamarQuandoSelecionar;
+import service.PegaDadosVeículo;
 
 /**
  *
@@ -26,14 +27,22 @@ import service.ChamarQuandoSelecionar;
 public class CadastroVeiculo extends javax.swing.JFrame {
 
     public int codigo_veiculo = 0;
+    private PegaDadosVeículo dadosveiculo;
 
     /**
      * Creates new form CadastroVeiculo
      */
     public CadastroVeiculo() {
         initComponents();
+        jButtonSelecionar.setVisible(false);
         service.CadastroVeiculo cad = new service.CadastroVeiculo();
         cad.ListaVeiculo(jTextFieldDescricao.getText(), (DefaultTableModel) jTabelaVeiculos.getModel());
+    }
+
+    CadastroVeiculo(PegaDadosVeículo pegaDadosVeículo) {
+        this();
+        jButtonSelecionar.setVisible(true);
+        this.dadosveiculo = pegaDadosVeículo;
     }
 
     /**
@@ -68,16 +77,19 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTabelaVeiculos = new javax.swing.JTable();
         jTextFieldPlaca1 = new javax.swing.JTextField();
-        jComboBoxModelo = new javax.swing.JComboBox<>();
+        jComboBoxModelo = new javax.swing.JComboBox<String>();
         jToggleButtonPessoa = new javax.swing.JToggleButton();
         jPanel3 = new javax.swing.JPanel();
         jBPesquisar = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jTextFieldLista1 = new javax.swing.JTextField();
         jLabelTipoPessoa1 = new javax.swing.JLabel();
+        jButtonSelecionar = new javax.swing.JButton();
 
         jTextField2.setText("jTextField2");
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setFocusTraversalPolicyProvider(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -146,33 +158,38 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jPanel2.add(jTextFieldDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 330, -1));
 
         jTextFieldPessoa.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-                jTextFieldPessoaAncestorMoved(evt);
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                jTextFieldPessoaAncestorMoved(evt);
             }
         });
         jPanel2.add(jTextFieldPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 330, -1));
 
         jTabelaVeiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Id", "Descrição", "Placa", "Modelo", "Pessoa"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTabelaVeiculos);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 860, 120));
         jPanel2.add(jTextFieldPlaca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 170, -1));
 
-        jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxModeloActionPerformed(evt);
@@ -247,6 +264,15 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jLabelTipoPessoa1.setText("Cadastro de Veículos");
         jPanel2.add(jLabelTipoPessoa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
+        jButtonSelecionar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jButtonSelecionar.setText("Selecionar");
+        jButtonSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelecionarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonSelecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 420, 100, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -259,6 +285,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
@@ -369,6 +396,21 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldLista1ActionPerformed
 
+    private void jButtonSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarActionPerformed
+        int linha = jTabelaVeiculos.getSelectedRow();
+        if (linha >= 0) {
+            int codigo = Integer.parseInt(
+                    String.valueOf(jTabelaVeiculos.getValueAt(linha, 0))
+            );
+            String placa = jTabelaVeiculos.getValueAt(linha, 2).toString();
+            String modelo = jTabelaVeiculos.getValueAt(linha, 3).toString();
+            dadosveiculo.ReceberValor(codigo, placa, modelo);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma linha!");
+        }
+    }//GEN-LAST:event_jButtonSelecionarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -410,6 +452,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonFechar;
     private javax.swing.JButton jButtonSalvar;
+    private javax.swing.JButton jButtonSelecionar;
     private javax.swing.JComboBox<String> jComboBoxModelo;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

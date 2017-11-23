@@ -12,7 +12,6 @@ import javax.persistence.SequenceGenerator;
 @SequenceGenerator(name = "idlancamentoordem", sequenceName = "idlancamentoordem",
         allocationSize = 1)
 public class LancamentoOrdem implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "idlancamentoordem")
     private int idlancamentoordem;

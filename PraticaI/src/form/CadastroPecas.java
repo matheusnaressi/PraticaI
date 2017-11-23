@@ -21,6 +21,8 @@ import javax.swing.table.DefaultTableModel;
 import model.Peca;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import service.PegaDadosPecas;
+import service.PegaDadosTipoServico;
 import util.HibernateUtil;
 
 /**
@@ -30,14 +32,22 @@ import util.HibernateUtil;
 public class CadastroPecas extends javax.swing.JFrame {
 
     public int codigo_peca = 0;
+    private PegaDadosPecas pegaDadosPecas;
 
     /**
      * Creates new form Pecas
      */
     public CadastroPecas() {
         initComponents();
+        jButtonSelecionar.setVisible(false);
         service.CadastroPecas cad = new service.CadastroPecas();
         cad.ListaPecas(jTDescricao.getText(), (DefaultTableModel) jTableListagemCadPecas.getModel());
+    }
+
+    CadastroPecas(PegaDadosPecas pegaDadosPecas) {
+        this();
+        jButtonSelecionar.setVisible(true);
+        this.pegaDadosPecas = pegaDadosPecas;
     }
 
     /**
@@ -69,7 +79,9 @@ public class CadastroPecas extends javax.swing.JFrame {
         jTextDescricao = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextDataEntrada = new javax.swing.JFormattedTextField();
+        jButtonSelecionar = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("frmCadastroPecas"); // NOI18N
         setResizable(false);
 
@@ -144,10 +156,7 @@ public class CadastroPecas extends javax.swing.JFrame {
 
         jTableListagemCadPecas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Codigo", "Descrição", "Quantidade", "Data entrada", "Valor"
@@ -240,6 +249,15 @@ public class CadastroPecas extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jTextDataEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 150, 110, -1));
+
+        jButtonSelecionar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jButtonSelecionar.setText("Selecionar");
+        jButtonSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelecionarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonSelecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 390, 100, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -368,6 +386,20 @@ public class CadastroPecas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextDataEntradaActionPerformed
 
+    private void jButtonSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarActionPerformed
+        int linha = jTableListagemCadPecas.getSelectedRow();
+        if (linha >= 0) {
+            int codigo = Integer.parseInt(
+                    String.valueOf(jTableListagemCadPecas.getValueAt(linha, 0))
+            );
+            String desricao = jTableListagemCadPecas.getValueAt(linha, 1).toString();
+            pegaDadosPecas.ReceberValor(codigo, desricao);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma linha!");
+        }
+    }//GEN-LAST:event_jButtonSelecionarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -410,6 +442,7 @@ public class CadastroPecas extends javax.swing.JFrame {
     private javax.swing.JButton jBPesquisar;
     private javax.swing.JButton jBSalvar;
     private javax.swing.JButton jButtonFechar;
+    private javax.swing.JButton jButtonSelecionar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -12,6 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import service.PegaDadosTipoServico;
+import service.PegaDadosVeículo;
 
 /**
  *
@@ -20,16 +22,24 @@ import javax.swing.table.DefaultTableModel;
 public class CadastroTipoServico extends javax.swing.JFrame {
 
     public int codigo_servico = 0;
+    private PegaDadosTipoServico dadosTipServico;
 
     /**
      * Creates new form TipoServico
      */
     public CadastroTipoServico() {
         initComponents();
+        jButtonSelecionar.setVisible(false);
         service.CadastroTipoServico cad = new service.CadastroTipoServico();
         cad.ListaTipoServico(jTpesquisar.getText(), (DefaultTableModel) jTableTipoServico.getModel());
     }
 
+    
+     CadastroTipoServico(PegaDadosTipoServico pegaDadosTipoServico) {
+        this();
+        jButtonSelecionar.setVisible(true);
+        this.dadosTipServico = pegaDadosTipoServico;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,6 +65,7 @@ public class CadastroTipoServico extends javax.swing.JFrame {
         jBSalvar = new javax.swing.JButton();
         jBAlterar = new javax.swing.JButton();
         jBExcluir = new javax.swing.JButton();
+        jButtonSelecionar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -142,10 +153,7 @@ public class CadastroTipoServico extends javax.swing.JFrame {
 
         jTableTipoServico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Codigo", "Descrição"
@@ -199,6 +207,15 @@ public class CadastroTipoServico extends javax.swing.JFrame {
         });
         jPanel4.add(jBExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, 120, -1));
 
+        jButtonSelecionar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jButtonSelecionar.setText("Selecionar");
+        jButtonSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelecionarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButtonSelecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 100, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -216,6 +233,8 @@ public class CadastroTipoServico extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
         service.CadastroTipoServico cad = new service.CadastroTipoServico();
         String descricao = jTDescricao.getText();
@@ -264,7 +283,7 @@ public class CadastroTipoServico extends javax.swing.JFrame {
     }//GEN-LAST:event_jBAlterarActionPerformed
 
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
-          if (JOptionPane.showConfirmDialog(this, "Você está certo disso?")
+        if (JOptionPane.showConfirmDialog(this, "Você está certo disso?")
                 == JOptionPane.YES_OPTION) {
             int linha = jTableTipoServico.getSelectedRow();
             if (linha >= 0) {
@@ -275,7 +294,7 @@ public class CadastroTipoServico extends javax.swing.JFrame {
                 cad.DeletarCadTipoServico(codigo);
                 cad.ListaTipoServico(jTpesquisar.getText(), (DefaultTableModel) jTableTipoServico.getModel());
                 limparCampos();
-                 jBAlterar.setEnabled(true);
+                jBAlterar.setEnabled(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Selecione uma linha!");
             }
@@ -285,6 +304,20 @@ public class CadastroTipoServico extends javax.swing.JFrame {
     private void jButtonFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonFecharActionPerformed
+
+    private void jButtonSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelecionarActionPerformed
+        int linha = jTableTipoServico.getSelectedRow();
+        if (linha >= 0) {
+            int codigo = Integer.parseInt(
+                    String.valueOf(jTableTipoServico.getValueAt(linha, 0))
+            );
+            String desricao = jTableTipoServico.getValueAt(linha, 1).toString();
+            dadosTipServico.ReceberValor(codigo, desricao);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma linha!");
+        }
+    }//GEN-LAST:event_jButtonSelecionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -331,6 +364,7 @@ public class CadastroTipoServico extends javax.swing.JFrame {
     private javax.swing.JButton jBExcluir;
     private javax.swing.JButton jBSalvar;
     private javax.swing.JButton jButtonFechar;
+    private javax.swing.JButton jButtonSelecionar;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelTipoPessoa;

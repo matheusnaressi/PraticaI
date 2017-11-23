@@ -18,6 +18,24 @@ public class ItensOrdem implements Serializable {
     private int peca_idpeca;
     private int lancamentoordem_idlancamentoordem;
     private int quantidade;
+    private String descricao;
+    private double valorunitario;
+
+    public double getValorunitario() {
+        return valorunitario;
+    }
+
+    public void setValorunitario(double valorunitario) {
+        this.valorunitario = valorunitario;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
     public int getIditensordem() {
         return iditensordem;

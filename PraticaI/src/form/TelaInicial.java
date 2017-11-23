@@ -5,6 +5,8 @@
  */
 package form;
 
+import model.Peca;
+
 /**
  *
  * @author elena
@@ -16,7 +18,7 @@ public class TelaInicial extends javax.swing.JFrame {
      */
     public TelaInicial() {
         initComponents();
-        jLabel2.setText("Usuário Logado: "+Login.logado.getNome());
+        jLabel2.setText("Usuário Logado: " + Login.logado.getNome());
     }
 
     /**
@@ -405,6 +407,7 @@ public class TelaInicial extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 1320, 710));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfiguracoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfiguracoesActionPerformed
@@ -414,7 +417,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private void jButtonPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPessoaActionPerformed
         CadastroPessoa pessoa = new CadastroPessoa();
         pessoa.show();
-  
+
     }//GEN-LAST:event_jButtonPessoaActionPerformed
 
     private void jButtonTipoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTipoServicoActionPerformed
@@ -423,7 +426,8 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTipoServicoActionPerformed
 
     private void jButtonPecas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPecas1ActionPerformed
-        // TODO add your handling code here:
+        CadastroPecas cad_pecas = new CadastroPecas();
+        cad_pecas.show();
     }//GEN-LAST:event_jButtonPecas1ActionPerformed
 
     private void jButtonHistoricoVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHistoricoVeiculoActionPerformed
@@ -445,7 +449,8 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonVeiculoActionPerformed
 
     private void jButtonOrdemServico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdemServico1ActionPerformed
-        // TODO add your handling code here:
+        Lancamento lanc = new Lancamento();
+        lanc.show();
     }//GEN-LAST:event_jButtonOrdemServico1ActionPerformed
 
     /**

@@ -5,11 +5,40 @@
  */
 package form;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import model.ItensOrdem;
+import model.LancamentoOrdem;
+import model.LancamentoTipoServico;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import service.ChamarQuandoSelecionar;
+import service.Lancamentos;
+import service.PegaDadosPecas;
+import service.PegaDadosTipoServico;
+import service.PegaDadosVeículo;
+import util.HibernateUtil;
+
 /**
  *
  * @author elena
  */
 public class Lancamento extends javax.swing.JFrame {
+
+    public int codigo_cliente;
+    public int codigo_lancamento;
 
     /**
      * Creates new form Lancamento
@@ -37,21 +66,17 @@ public class Lancamento extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextFieldTipoServico = new javax.swing.JTextField();
         jButtonVeiculo = new javax.swing.JButton();
-        jRadioButtonJuridica = new javax.swing.JRadioButton();
-        jRadioButtonFisica = new javax.swing.JRadioButton();
-        jLabelTipoPessoa1 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jFormattedDataEntrada = new javax.swing.JFormattedTextField();
         jButtonGravar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jButtonImprimirOrdem = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableTabela = new javax.swing.JTable();
+        jTableTabelaItens = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jTextField10 = new javax.swing.JTextField();
-        jTextFieldValorunitario = new javax.swing.JTextField();
         jButtonBuscaPessoa2 = new javax.swing.JButton();
         jTextFieldProduto1 = new javax.swing.JTextField();
         jTextFieldQuantidade1 = new javax.swing.JTextField();
@@ -61,16 +86,30 @@ public class Lancamento extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel13 = new javax.swing.JLabel();
-        jTextFieldDocumento1 = new javax.swing.JTextField();
+        jTextFieldDocumento = new javax.swing.JTextField();
         jTextFieldModelo = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jTextFieldVeiculo = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jTextFieldPlaca1 = new javax.swing.JTextField();
+        jTextFieldPlaca = new javax.swing.JTextField();
         jButtonBuscarProduto1 = new javax.swing.JButton();
         jButtonTipoServico1 = new javax.swing.JButton();
+        jButtonCancelar4 = new javax.swing.JButton();
+        jButtonCancelar5 = new javax.swing.JButton();
+        jButtonCancelar6 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableTipoServico = new javax.swing.JTable();
+        jLabel15 = new javax.swing.JLabel();
+        jTextFieldQuantidade2 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabelDescricaoTipoServico = new javax.swing.JLabel();
+        jTextFieldValorunitario1 = new javax.swing.JFormattedTextField();
+        jLabelDescricaoItem = new javax.swing.JLabel();
+        jTextFieldValorunitario = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -101,144 +140,248 @@ public class Lancamento extends javax.swing.JFrame {
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 40));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jLabel1.setText("Nome do Cliente");
+        jLabel1.setText("Código  Cliente");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
-        jPanel1.add(jTextFieldPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 410, 20));
+
+        jTextFieldPessoa.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                buscarDoc(evt);
+            }
+        });
+        jTextFieldPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPessoaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTextFieldPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 50, 30));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel3.setText("Documento");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 20));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, 20));
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel4.setText("Itens da Ordem");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel5.setText("Data de entrada ");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
-        jPanel1.add(jTextFieldTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 200, 120, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
+        jTextFieldTipoServico.setEditable(false);
+        jPanel1.add(jTextFieldTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 100, -1));
 
         jButtonVeiculo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jButtonVeiculo.setText("Buscar");
-        jPanel1.add(jButtonVeiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, 20));
-
-        jRadioButtonJuridica.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jRadioButtonJuridica.setText("Juridica");
-        jPanel1.add(jRadioButtonJuridica, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, -1, -1));
-
-        jRadioButtonFisica.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jRadioButtonFisica.setText("Física");
-        jRadioButtonFisica.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVeiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonFisicaActionPerformed(evt);
+                jButtonVeiculoActionPerformed(evt);
             }
         });
-        jPanel1.add(jRadioButtonFisica, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 70, -1));
+        jPanel1.add(jButtonVeiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 160, 100, 20));
 
-        jLabelTipoPessoa1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jLabelTipoPessoa1.setText("Tipo pessoa");
-        jPanel1.add(jLabelTipoPessoa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, -1));
-
-        jFormattedTextField1.setText("    /   /   ");
-        jPanel1.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 110, -1));
+        jFormattedDataEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yyyy"))));
+        jFormattedDataEntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedDataEntradaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jFormattedDataEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 110, -1));
 
         jButtonGravar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jButtonGravar.setText("Gravar");
-        jPanel1.add(jButtonGravar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 490, 120, -1));
+        jButtonGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGravarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonGravar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 560, 120, -1));
 
         jButtonCancelar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jButtonCancelar.setText("Excluir");
-        jPanel1.add(jButtonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 280, 80, -1));
+        jPanel1.add(jButtonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 370, 80, -1));
 
         jButtonImprimirOrdem.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jButtonImprimirOrdem.setText("Imprimir Ordem");
-        jPanel1.add(jButtonImprimirOrdem, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 490, 170, -1));
+        jButtonImprimirOrdem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonImprimirOrdemActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonImprimirOrdem, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 560, 170, -1));
 
-        jTableTabela.setModel(new javax.swing.table.DefaultTableModel(
+        jTableTabelaItens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Código Produto", "Descrição Produto", "Valor unitário", "Quantidade", "Valor total"
+                "Código Produto", "Descrição Produto", "Valor unitário", "Quantidade"
             }
-        ));
-        jScrollPane2.setViewportView(jTableTabela);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 920, 130));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTableTabelaItens);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 920, 130));
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel8.setText("Valor unitário");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, -1, -1));
 
-        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel9.setText("Tipo de serviço");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel10.setText("Produto");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel11.setText("Quantidade");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 280, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, -1, -1));
         jPanel1.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-        jPanel1.add(jTextFieldValorunitario, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 280, 80, -1));
 
         jButtonBuscaPessoa2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jButtonBuscaPessoa2.setText("Buscar");
-        jPanel1.add(jButtonBuscaPessoa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 50, 110, 20));
-        jPanel1.add(jTextFieldProduto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 140, -1));
-        jPanel1.add(jTextFieldQuantidade1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 80, -1));
+        jButtonBuscaPessoa2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscaPessoa2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonBuscaPessoa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 110, 20));
+
+        jTextFieldProduto1.setEditable(false);
+        jPanel1.add(jTextFieldProduto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 140, -1));
+        jPanel1.add(jTextFieldQuantidade1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, 80, -1));
 
         jButtonCancelar1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jButtonCancelar1.setText("Cancelar");
-        jPanel1.add(jButtonCancelar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 490, 120, -1));
+        jPanel1.add(jButtonCancelar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 560, 120, -1));
 
         jButtonCancelar2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jButtonCancelar2.setText("Incluir");
-        jPanel1.add(jButtonCancelar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 280, 80, -1));
+        jButtonCancelar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelar2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonCancelar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 370, 80, -1));
 
         jButtonCancelar3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jButtonCancelar3.setText("Alterar");
-        jPanel1.add(jButtonCancelar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 280, 90, -1));
+        jPanel1.add(jButtonCancelar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 370, 90, -1));
 
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel2.setText("Dados da Ordem de Serviço ");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 162, 940, 0));
 
         jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel13.setText("Placa");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
-        jPanel1.add(jTextFieldDocumento1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 230, -1));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, -1, -1));
 
+        jTextFieldDocumento.setEditable(false);
+        jPanel1.add(jTextFieldDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 110, -1));
+
+        jTextFieldModelo.setEditable(false);
         jTextFieldModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldModeloActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextFieldModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 170, -1));
+        jPanel1.add(jTextFieldModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 100, -1));
 
         jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel12.setText("Veículo");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
-        jPanel1.add(jTextFieldVeiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 70, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, -1, -1));
+
+        jTextFieldVeiculo.setEditable(false);
+        jPanel1.add(jTextFieldVeiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 70, 30));
 
         jLabel14.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel14.setText("Modelo Veículo");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
-        jPanel1.add(jTextFieldPlaca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, 170, -1));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
+        jPanel1.add(jTextFieldPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 160, 170, -1));
 
         jButtonBuscarProduto1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jButtonBuscarProduto1.setText("Buscar");
-        jPanel1.add(jButtonBuscarProduto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 80, 20));
+        jButtonBuscarProduto1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarProduto1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonBuscarProduto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 80, 20));
 
         jButtonTipoServico1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jButtonTipoServico1.setText("Buscar");
-        jPanel1.add(jButtonTipoServico1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 200, 100, 20));
+        jButtonTipoServico1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTipoServico1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonTipoServico1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 80, 20));
+
+        jButtonCancelar4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jButtonCancelar4.setText("Incluir");
+        jButtonCancelar4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelar4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonCancelar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 200, 80, -1));
+
+        jButtonCancelar5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jButtonCancelar5.setText("Alterar");
+        jPanel1.add(jButtonCancelar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 200, 90, -1));
+
+        jButtonCancelar6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jButtonCancelar6.setText("Excluir");
+        jPanel1.add(jButtonCancelar6, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 200, 80, -1));
+
+        jTableTipoServico.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código Serviço", "Descrição Serviço", "Valor Unitário", "Quantidade"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableTipoServico);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 920, 100));
+
+        jLabel15.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel15.setText("Quantidade");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
+        jPanel1.add(jTextFieldQuantidade2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 80, -1));
+
+        jLabel16.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        jLabel16.setText("Valor unitário");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 200, -1, -1));
+
+        jLabel7.setText("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+        jPanel1.add(jLabelDescricaoTipoServico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 225, 550, 20));
+
+        jTextFieldValorunitario1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        jPanel1.add(jTextFieldValorunitario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 70, 30));
+        jPanel1.add(jLabelDescricaoItem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 630, 20));
+
+        jTextFieldValorunitario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
+        jPanel1.add(jTextFieldValorunitario, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 370, 100, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -254,15 +397,246 @@ public class Lancamento extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jRadioButtonFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFisicaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonFisicaActionPerformed
 
     private void jTextFieldModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldModeloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldModeloActionPerformed
+
+    private void jButtonGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonGravarActionPerformed
+
+    private void jButtonBuscaPessoa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscaPessoa2ActionPerformed
+        CadastroPessoa form = new CadastroPessoa(new ChamarQuandoSelecionar() {
+            @Override
+            public void ReceberValor(int id) {
+                codigo_cliente = id;
+                jTextFieldPessoa.setText(String.valueOf(id));
+                service.Lancamentos lan = new service.Lancamentos();
+                if (codigo_cliente != 0) {
+                    String docu = lan.buscaDoc(codigo_cliente);
+                    jTextFieldDocumento.setText(docu);
+                }
+            }
+        });
+        form.setVisible(true);
+
+    }//GEN-LAST:event_jButtonBuscaPessoa2ActionPerformed
+
+    private void jTextFieldPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPessoaActionPerformed
+        service.Lancamentos lan = new service.Lancamentos();
+        if (codigo_cliente != 0) {
+            String docu = lan.buscaDoc(codigo_cliente);
+            jTextFieldDocumento.setText(docu);
+        }
+    }//GEN-LAST:event_jTextFieldPessoaActionPerformed
+
+    private void buscarDoc(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_buscarDoc
+        service.Lancamentos lan = new service.Lancamentos();
+        if (codigo_cliente != 0) {
+            String docu = lan.buscaDoc(codigo_cliente);
+            jTextFieldDocumento.setText(docu);
+        }
+    }//GEN-LAST:event_buscarDoc
+
+    private void jButtonVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVeiculoActionPerformed
+        CadastroVeiculo form = new CadastroVeiculo(new PegaDadosVeículo() {
+            @Override
+            public void ReceberValor(int id, String placa, String nome_modelo) {
+                jTextFieldPlaca.setText(String.valueOf(placa));
+                jTextFieldVeiculo.setText(String.valueOf(id));
+                jTextFieldModelo.setText(String.valueOf(nome_modelo));
+            }
+        });
+        form.setVisible(true);
+
+
+    }//GEN-LAST:event_jButtonVeiculoActionPerformed
+
+    private void jButtonTipoServico1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTipoServico1ActionPerformed
+        CadastroTipoServico form = new CadastroTipoServico(new PegaDadosTipoServico() {
+            @Override
+            public void ReceberValor(int id, String descricao) {
+                jLabelDescricaoTipoServico.setText(String.valueOf(descricao));
+                jTextFieldTipoServico.setText(String.valueOf(id));
+            }
+        });
+        form.setVisible(true);
+    }//GEN-LAST:event_jButtonTipoServico1ActionPerformed
+
+    public void limpaCamposTipoServico() {
+        jTextFieldTipoServico.setText("");
+        jTextFieldQuantidade2.setText("");
+        jTextFieldValorunitario1.setText("");
+    }
+
+    public void buscaDadosTipoServico() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query q = session.createQuery("from LancamentoTipoServico as t where 1=1 and lancamentoordem_idlancamentoordem = " + codigo_lancamento);
+        List<LancamentoTipoServico> lancamentoTipoServico = q.list();
+        DefaultTableModel model = (DefaultTableModel) jTableTipoServico.getModel();
+        model.setNumRows(0);
+        for (LancamentoTipoServico t : lancamentoTipoServico) {
+            String[] linha
+                    = {String.valueOf(t.getIdlancamentotiposervico()),
+                        String.valueOf(t.getDescricaoservico()),
+                        String.valueOf(t.getTiposervico_valorunitario()),
+                        String.valueOf(t.getTiposervico_quantidade())};
+            model.addRow(linha);
+        }
+    }
+
+    @SuppressWarnings("empty-statement")
+    private void jButtonCancelar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelar4ActionPerformed
+        service.Lancamentos lan = new Lancamentos();
+        LancamentoOrdem lanModel = new LancamentoOrdem();
+        LancamentoTipoServico tpServicoModel = new LancamentoTipoServico();
+
+        if (codigo_lancamento == 0) { /*salvo lançamento e + servico*/
+            /*SALVANDO LANÇAMENTO*/
+
+            int pessoa_id = Integer.parseInt(jTextFieldPessoa.getText());
+            int veiculo_idveiculo = Integer.parseInt(jTextFieldVeiculo.getText());
+            int idlancamentoordem = lan.buscagetIdlancamentoordem();
+            codigo_lancamento = idlancamentoordem;
+            String data = jFormattedDataEntrada.getText();
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            Date data_entrada = null;
+            try {
+                data_entrada = formato.parse(data);
+            } catch (ParseException ex) {
+                Logger.getLogger(Lancamento.class.getName()).log(Level.SEVERE, null, ex);
+            };
+            lan.salvarLancamento(pessoa_id, veiculo_idveiculo, idlancamentoordem, data_entrada);
+
+            /*SALVANDO SERVIÇO*/
+            String codigo_servico = jTextFieldTipoServico.getText();
+            String qtade_servico = jTextFieldQuantidade2.getText();
+            String valor_unitario = jTextFieldValorunitario1.getText();
+            valor_unitario = valor_unitario.replace(".", "").replace(".", "").replace(".", "").replace(".", "").replace(",", ".");
+            double valorunitario = Double.parseDouble(valor_unitario);
+            limpaCamposTipoServico();
+            int idlancamentotiposervico = tpServicoModel.getIdlancamentotiposervico();
+            String descricao = jLabelDescricaoTipoServico.getText();
+            lan.salvarLanTipoServico(idlancamentotiposervico, idlancamentoordem,
+                    Integer.parseInt(codigo_servico), qtade_servico, valorunitario, descricao);
+            buscaDadosTipoServico();
+        } else { /*salvo serviço*/
+
+            String codigo_servico = jTextFieldTipoServico.getText();
+            String qtade_servico = jTextFieldQuantidade2.getText();
+            String valor_unitario = jTextFieldValorunitario1.getText();
+            valor_unitario = valor_unitario.replace(".", "").replace(".", "").replace(".", "").replace(".", "").replace(",", ".");
+            double valorunitario = Double.parseDouble(valor_unitario);
+            limpaCamposTipoServico();
+            int idlancamentotiposervico = tpServicoModel.getIdlancamentotiposervico();
+            String descricao = jLabelDescricaoTipoServico.getText();
+            lan.salvarLanTipoServico(idlancamentotiposervico, codigo_lancamento,
+                    Integer.parseInt(codigo_servico), qtade_servico, valorunitario, descricao);
+            buscaDadosTipoServico();
+        }
+    }//GEN-LAST:event_jButtonCancelar4ActionPerformed
+
+    private void jFormattedDataEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedDataEntradaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedDataEntradaActionPerformed
+
+    private void jButtonBuscarProduto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarProduto1ActionPerformed
+        CadastroPecas form = new CadastroPecas(new PegaDadosPecas() {
+            @Override
+            public void ReceberValor(int id, String descricao) {
+                jLabelDescricaoItem.setText(String.valueOf(descricao));
+                jTextFieldProduto1.setText(String.valueOf(id));
+            }
+        });
+        form.setVisible(true);
+    }//GEN-LAST:event_jButtonBuscarProduto1ActionPerformed
+
+    private void jButtonCancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelar2ActionPerformed
+        service.Lancamentos lan = new Lancamentos();
+        LancamentoOrdem lanModel = new LancamentoOrdem();
+        LancamentoTipoServico tpServicoModel = new LancamentoTipoServico();
+
+        if (codigo_lancamento == 0) { /*salvo lançamento e + servico*/
+            /*SALVANDO LANÇAMENTO*/
+
+            int pessoa_id = Integer.parseInt(jTextFieldPessoa.getText());
+            int veiculo_idveiculo = Integer.parseInt(jTextFieldVeiculo.getText());
+            int idlancamentoordem = lan.buscagetIdlancamentoordem();
+            codigo_lancamento = idlancamentoordem;
+            String data = jFormattedDataEntrada.getText();
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            Date data_entrada = null;
+            try {
+                data_entrada = formato.parse(data);
+            } catch (ParseException ex) {
+                Logger.getLogger(Lancamento.class.getName()).log(Level.SEVERE, null, ex);
+            };
+            lan.salvarLancamento(pessoa_id, veiculo_idveiculo, idlancamentoordem, data_entrada);
+            /*SALVANDO ITEM*/
+            int idpeca = Integer.parseInt(jTextFieldProduto1.getText());
+            int quantidade = Integer.parseInt(jTextFieldQuantidade1.getText());
+            String valor_unitario = jTextFieldValorunitario.getText();
+            valor_unitario = valor_unitario.replace(".", "").replace(".", "").replace(".", "").replace(".", "").replace(",", ".");
+            double valorunitario = Double.parseDouble(valor_unitario);
+            String descricao = jLabelDescricaoItem.getText();
+            limpaCamposItens();
+            lan.salvarLanItens(idlancamentoordem, idpeca, quantidade, valorunitario, descricao);
+            buscaDadosItens();
+        } else { /*salvo ITEM*/
+
+            int idpeca = Integer.parseInt(jTextFieldProduto1.getText());
+            int quantidade = Integer.parseInt(jTextFieldQuantidade1.getText());
+            String valor_unitario = jTextFieldValorunitario.getText();
+            valor_unitario = valor_unitario.replace(".", "").replace(".", "").replace(".", "").replace(".", "").replace(",", ".");
+            double valorunitario = Double.parseDouble(valor_unitario);
+            String descricao = jLabelDescricaoItem.getText();
+            limpaCamposItens();
+            lan.salvarLanItens(codigo_lancamento, idpeca, quantidade, valorunitario, descricao);
+            buscaDadosItens();
+        }
+    }//GEN-LAST:event_jButtonCancelar2ActionPerformed
+
+    private void jButtonImprimirOrdemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimirOrdemActionPerformed
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<ItensOrdem> list = session.createQuery("from ItensOrdem where lancamentoordem_idlancamentoordem = " + codigo_lancamento).list();
+        JRBeanCollectionDataSource jrs = new JRBeanCollectionDataSource(list);
+        Map parametros = new HashMap();
+        try {
+            JasperPrint jpr
+                    = JasperFillManager.fillReport("src/relatorios/Ordem.jasper",
+                            parametros,
+                            jrs);
+            JasperViewer.viewReport(jpr, false);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jButtonImprimirOrdemActionPerformed
+
+    public void limpaCamposItens() {
+        jTextFieldProduto1.setText("");
+        jTextFieldQuantidade1.setText("");
+        jTextFieldValorunitario.setText("");
+        jLabelDescricaoItem.setText("");
+    }
+
+    public void buscaDadosItens() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query q = session.createQuery("from ItensOrdem as t where 1=1 and lancamentoordem_idlancamentoordem = " + codigo_lancamento);
+        List<ItensOrdem> itensOrdem = q.list();
+        DefaultTableModel model = (DefaultTableModel) jTableTabelaItens.getModel();
+        model.setNumRows(0);
+        for (ItensOrdem t : itensOrdem) {
+            String[] linha
+                    = {String.valueOf(t.getIditensordem()),
+                        String.valueOf(t.getDescricao()),
+                        String.valueOf(t.getValorunitario()),
+                        String.valueOf(t.getQuantidade())};
+            model.addRow(linha);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -306,41 +680,50 @@ public class Lancamento extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCancelar1;
     private javax.swing.JButton jButtonCancelar2;
     private javax.swing.JButton jButtonCancelar3;
+    private javax.swing.JButton jButtonCancelar4;
+    private javax.swing.JButton jButtonCancelar5;
+    private javax.swing.JButton jButtonCancelar6;
     private javax.swing.JButton jButtonGravar;
     private javax.swing.JButton jButtonImprimirOrdem;
     private javax.swing.JButton jButtonTipoServico1;
     private javax.swing.JButton jButtonVeiculo;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JFormattedTextField jFormattedDataEntrada;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabelTipoPessoa1;
+    private javax.swing.JLabel jLabelDescricaoItem;
+    private javax.swing.JLabel jLabelDescricaoTipoServico;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButtonFisica;
-    private javax.swing.JRadioButton jRadioButtonJuridica;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTableTabela;
+    private javax.swing.JTable jTableTabelaItens;
+    private javax.swing.JTable jTableTipoServico;
     private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextFieldDocumento1;
+    private javax.swing.JTextField jTextFieldDocumento;
     private javax.swing.JTextField jTextFieldModelo;
     private javax.swing.JTextField jTextFieldPessoa;
-    private javax.swing.JTextField jTextFieldPlaca1;
+    private javax.swing.JTextField jTextFieldPlaca;
     private javax.swing.JTextField jTextFieldProduto1;
     private javax.swing.JTextField jTextFieldQuantidade1;
+    private javax.swing.JTextField jTextFieldQuantidade2;
     private javax.swing.JTextField jTextFieldTipoServico;
-    private javax.swing.JTextField jTextFieldValorunitario;
+    private javax.swing.JFormattedTextField jTextFieldValorunitario;
+    private javax.swing.JFormattedTextField jTextFieldValorunitario1;
     private javax.swing.JTextField jTextFieldVeiculo;
     // End of variables declaration//GEN-END:variables
 }

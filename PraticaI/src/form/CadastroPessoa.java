@@ -30,9 +30,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
         initComponents();
         service.CadastroPessoa cad = new service.CadastroPessoa();
         jButtonSelecionar.setVisible(false);
-
         cad.ListaPessoa("", (DefaultTableModel) jTableTabela.getModel());
-
     }
 
     public CadastroPessoa(ChamarQuandoSelecionar chamarSelecionar) {
@@ -85,6 +83,7 @@ public class CadastroPessoa extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -114,15 +113,20 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
         jTableTabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Codigo", "Nome", "Tipo Pessoa", "Documento"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTableTabela);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 860, 90));
@@ -135,15 +139,15 @@ public class CadastroPessoa extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButtonSelecionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 350, 100, 30));
-        jPanel2.add(jPasswordSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 170, -1));
-        jPanel2.add(jTextFieldDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 370, -1));
+        jPanel2.add(jPasswordSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 170, -1));
+        jPanel2.add(jTextFieldDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 250, -1));
 
         jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldNomeActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 550, -1));
+        jPanel2.add(jTextFieldNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 510, -1));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -152,11 +156,11 @@ public class CadastroPessoa extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel2.setText("Documento");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 80, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 80, -1));
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel4.setText("Senha");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
         jLabelTipoPessoa1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabelTipoPessoa1.setText("Tipo pessoa");
