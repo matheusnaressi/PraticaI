@@ -5,11 +5,32 @@
  */
 package form;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.ItensOrdem;
+import model.LancamentoOrdem;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import service.ChamarQuandoSelecionar;
+import util.HibernateUtil;
+
 /**
  *
  * @author elena
  */
 public class Reimpressa extends javax.swing.JFrame {
+
+    public int codigo;
 
     /**
      * Creates new form Reimpressa
@@ -40,9 +61,9 @@ public class Reimpressa extends javax.swing.JFrame {
         jTextFieldPessoa = new javax.swing.JTextField();
         jButtonBuscaPessoa2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jTextCodigoOrdem = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -55,7 +76,8 @@ public class Reimpressa extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -122,55 +144,147 @@ public class Reimpressa extends javax.swing.JFrame {
 
         jButtonCancelar1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jButtonCancelar1.setText("Imprimir");
+        jButtonCancelar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelar1ActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButtonCancelar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, 120, -1));
 
         jButtonCancelar2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jButtonCancelar2.setText("Fechar");
+        jButtonCancelar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelar2ActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButtonCancelar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, 120, -1));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jLabel1.setText("Nome do Cliente");
+        jLabel1.setText("Cliente");
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
-        jPanel3.add(jTextFieldPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 410, 20));
+        jPanel3.add(jTextFieldPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 50, 30));
 
         jButtonBuscaPessoa2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jButtonBuscaPessoa2.setText("Buscar");
-        jPanel3.add(jButtonBuscaPessoa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 70, 130, 20));
+        jButtonBuscaPessoa2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscaPessoa2ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButtonBuscaPessoa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 80, -1));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jLabel5.setText("Data de entrada ");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
-
-        jFormattedTextField1.setText("    /   /   ");
-        jPanel3.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 130, -1));
+        jLabel5.setText("Codigo Ordem");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Nome", "Tipo de serviço", "Data entrada"
+                "Cod. Ordem", "Data entrada"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 660, 90));
+        jPanel3.add(jTextCodigoOrdem, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 50, 30));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 310));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBPesquisar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisar1ActionPerformed
-       
+
     }//GEN-LAST:event_jBPesquisar1ActionPerformed
 
     private void jTextFieldListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldListaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldListaActionPerformed
+
+    private void jButtonCancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelar2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonCancelar2ActionPerformed
+
+    private void jButtonBuscaPessoa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscaPessoa2ActionPerformed
+        CadastroPessoa form = new CadastroPessoa(new ChamarQuandoSelecionar() {
+            @Override
+            public void ReceberValor(int id) {
+                codigo = id;
+                jTextFieldPessoa.setText(String.valueOf(id));
+                buscaDadosOrdem(String.valueOf(id));
+            }
+        });
+        form.setVisible(true);
+
+    }//GEN-LAST:event_jButtonBuscaPessoa2ActionPerformed
+
+    public void buscaDadosOrdem(String codigo) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query q = session.createQuery("from LancamentoOrdem as t where 1=1 and pessoa_id = " + codigo);
+        List<LancamentoOrdem> lancamentoOrdem = q.list();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setNumRows(0);
+        for (LancamentoOrdem t : lancamentoOrdem) {
+            String[] linha
+                    = {String.valueOf(t.getIdlancamentoordem()),
+                        String.valueOf(t.getDataentrada())};
+            model.addRow(linha);
+        }
+    }
+
+    private void jButtonCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelar1ActionPerformed
+        if (!"".equals(jTextCodigoOrdem.getText())) {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/PraticaI", "root", "");
+                HashMap parametros = new HashMap();
+                parametros.put("idlancamentoordem", jTextCodigoOrdem.getText());
+
+                JasperPrint print = JasperFillManager.fillReport("src/relatorios/Ordem.jasper", parametros, conn);
+                JasperViewer jv = new JasperViewer(print, false);
+                jv.setVisible(true); //chama o formulario para visualização
+                jv.toFront(); //set o formulario a frente da aplicação
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatório!\nErro:" + ex);
+            }
+        } else {
+            int linha = jTable1.getSelectedRow();
+            if (linha >= 0) {
+                String codigo = String.valueOf(jTable1.getValueAt(linha, 0));
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/PraticaI", "root", "");
+                    HashMap parametros = new HashMap();
+                    parametros.put("idlancamentoordem", codigo);
+
+                    JasperPrint print = JasperFillManager.fillReport("src/relatorios/Ordem.jasper", parametros, conn);
+                    JasperViewer jv = new JasperViewer(print, false);
+                    jv.setVisible(true); //chama o formulario para visualização
+                    jv.toFront(); //set o formulario a frente da aplicação
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatório!\nErro:" + ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_jButtonCancelar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,7 +326,6 @@ public class Reimpressa extends javax.swing.JFrame {
     private javax.swing.JButton jButtonBuscaPessoa2;
     private javax.swing.JButton jButtonCancelar1;
     private javax.swing.JButton jButtonCancelar2;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -222,6 +335,7 @@ public class Reimpressa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextCodigoOrdem;
     private javax.swing.JTextField jTextFieldLista;
     private javax.swing.JTextField jTextFieldPessoa;
     // End of variables declaration//GEN-END:variables

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<hibernateDataAdapter class="net.sf.jasperreports.data.hibernate.HibernateDataAdapterImpl"><name>New Data Adapter 1</name><xMLFileName>C:\Arquivos\SISTEMAS DE INFORMAÇÃO\4º SEMESTRE\LINGUAGEM DE PROGRAMAÇÃO I - SEXTA-FEIRA\PraticaI\PraticaI\PraticaI\src\hibernate.cfg.xml</xMLFileName><propertiesFileName></propertiesFileName><useAnnotation>false</useAnnotation></hibernateDataAdapter>

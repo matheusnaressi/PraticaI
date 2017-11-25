@@ -295,7 +295,7 @@ public class CadastroPecas extends javax.swing.JFrame {
             Logger.getLogger(CadastroPecas.class.getName()).log(Level.SEVERE, null, ex);
         }
         String valor = jTextValorUnitario.getText();
-        valor = valor.replace(".", "").replace(".", "").replace(".", "").replace(".", "").replace(",", ".");
+        valor = valor.replace(".", "").replace(".", "").replace(".", "").replace(".", "").replace(".", "").replace(",", ".");
         if ("".equals(descricao)) {
             JOptionPane.showMessageDialog(this, "Preencher a descrição da peça!");
         } else if (data_entrada == null) {

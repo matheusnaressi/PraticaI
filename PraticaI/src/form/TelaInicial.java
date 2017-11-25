@@ -40,6 +40,8 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -112,15 +114,23 @@ public class TelaInicial extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(51, 110, 123));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("JV Mecânica e Solda LTDA - ME");
-        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, 50));
+        jLabel5.setText("Três de Maio - RS");
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 90, -1, 50));
 
-        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("JV Mecânica e Solda LTDA - ME");
-        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 550, 50));
+        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, 610, 50));
+
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("EST BR 472 - Trevo 226 - Complexo Thomé  ");
+        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, -1, 50));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/inicoo.png"))); // NOI18N
+        jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 0, 160, 150));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1320, 160));
 
@@ -431,15 +441,19 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonPecas1ActionPerformed
 
     private void jButtonHistoricoVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHistoricoVeiculoActionPerformed
-        // TODO add your handling code here:
+        ConsultaHistoricoVeiculo ConHisVei = new ConsultaHistoricoVeiculo();
+        ConHisVei.show();
     }//GEN-LAST:event_jButtonHistoricoVeiculoActionPerformed
 
     private void jButtonHistoricoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHistoricoClienteActionPerformed
-        // TODO add your handling code here:
+        ConsultaHistoricoVeiculo ConHisVei = new ConsultaHistoricoVeiculo();
+        ConHisVei.show();
     }//GEN-LAST:event_jButtonHistoricoClienteActionPerformed
 
     private void jButtonReimprimirorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReimprimirorActionPerformed
-        // TODO add your handling code here:
+        Reimpressa rei = new Reimpressa();
+        rei.show();
+
     }//GEN-LAST:event_jButtonReimprimirorActionPerformed
 
     private void jButtonVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVeiculoActionPerformed
@@ -519,8 +533,10 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;

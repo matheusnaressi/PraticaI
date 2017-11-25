@@ -5,6 +5,9 @@
  */
 package form;
 
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.ItensOrdem;
 import model.LancamentoOrdem;
@@ -67,7 +71,6 @@ public class Lancamento extends javax.swing.JFrame {
         jTextFieldTipoServico = new javax.swing.JTextField();
         jButtonVeiculo = new javax.swing.JButton();
         jFormattedDataEntrada = new javax.swing.JFormattedTextField();
-        jButtonGravar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jButtonImprimirOrdem = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -82,7 +85,6 @@ public class Lancamento extends javax.swing.JFrame {
         jTextFieldQuantidade1 = new javax.swing.JTextField();
         jButtonCancelar1 = new javax.swing.JButton();
         jButtonCancelar2 = new javax.swing.JButton();
-        jButtonCancelar3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel13 = new javax.swing.JLabel();
@@ -95,7 +97,6 @@ public class Lancamento extends javax.swing.JFrame {
         jButtonBuscarProduto1 = new javax.swing.JButton();
         jButtonTipoServico1 = new javax.swing.JButton();
         jButtonCancelar4 = new javax.swing.JButton();
-        jButtonCancelar5 = new javax.swing.JButton();
         jButtonCancelar6 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTipoServico = new javax.swing.JTable();
@@ -127,14 +128,14 @@ public class Lancamento extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
-                .addContainerGap(836, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 40));
@@ -187,17 +188,13 @@ public class Lancamento extends javax.swing.JFrame {
         });
         jPanel1.add(jFormattedDataEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 110, -1));
 
-        jButtonGravar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jButtonGravar.setText("Gravar");
-        jButtonGravar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonGravarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButtonGravar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 560, 120, -1));
-
         jButtonCancelar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jButtonCancelar.setText("Excluir");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButtonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 370, 80, -1));
 
         jButtonImprimirOrdem.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -260,8 +257,13 @@ public class Lancamento extends javax.swing.JFrame {
         jPanel1.add(jTextFieldQuantidade1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, 80, -1));
 
         jButtonCancelar1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jButtonCancelar1.setText("Cancelar");
-        jPanel1.add(jButtonCancelar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 560, 120, -1));
+        jButtonCancelar1.setText("Fechar");
+        jButtonCancelar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelar1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButtonCancelar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 560, 120, -1));
 
         jButtonCancelar2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jButtonCancelar2.setText("Incluir");
@@ -270,11 +272,7 @@ public class Lancamento extends javax.swing.JFrame {
                 jButtonCancelar2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonCancelar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 370, 80, -1));
-
-        jButtonCancelar3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jButtonCancelar3.setText("Alterar");
-        jPanel1.add(jButtonCancelar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 370, 90, -1));
+        jPanel1.add(jButtonCancelar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 370, 80, -1));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel2.setText("Dados da Ordem de Serviço ");
@@ -333,14 +331,15 @@ public class Lancamento extends javax.swing.JFrame {
                 jButtonCancelar4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonCancelar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 200, 80, -1));
-
-        jButtonCancelar5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jButtonCancelar5.setText("Alterar");
-        jPanel1.add(jButtonCancelar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 200, 90, -1));
+        jPanel1.add(jButtonCancelar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 200, 80, -1));
 
         jButtonCancelar6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jButtonCancelar6.setText("Excluir");
+        jButtonCancelar6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelar6ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButtonCancelar6, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 200, 80, -1));
 
         jTableTipoServico.setModel(new javax.swing.table.DefaultTableModel(
@@ -403,10 +402,6 @@ public class Lancamento extends javax.swing.JFrame {
     private void jTextFieldModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldModeloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldModeloActionPerformed
-
-    private void jButtonGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonGravarActionPerformed
 
     private void jButtonBuscaPessoa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscaPessoa2ActionPerformed
         CadastroPessoa form = new CadastroPessoa(new ChamarQuandoSelecionar() {
@@ -600,20 +595,69 @@ public class Lancamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelar2ActionPerformed
 
     private void jButtonImprimirOrdemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImprimirOrdemActionPerformed
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        List<ItensOrdem> list = session.createQuery("from ItensOrdem where lancamentoordem_idlancamentoordem = " + codigo_lancamento).list();
-        JRBeanCollectionDataSource jrs = new JRBeanCollectionDataSource(list);
-        Map parametros = new HashMap();
+//        Map parametros = new HashMap();
+//        JRBeanCollectionDataSource dados = new JRBeanCollectionDataSource(null, false);
+//        parametros.put("idlancamentoordem", "2");
+//        try {
+//            JasperPrint jpr
+//                    = JasperFillManager.fillReport("src/relatorios/Ordem.jasper",
+//                            parametros);
+//            JasperViewer.viewReport(jpr, false);
+//        } catch (JRException ex) {
+//            ex.printStackTrace();
+//        }
         try {
-            JasperPrint jpr
-                    = JasperFillManager.fillReport("src/relatorios/Ordem.jasper",
-                            parametros,
-                            jrs);
-            JasperViewer.viewReport(jpr, false);
-        } catch (JRException ex) {
-            ex.printStackTrace();
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/PraticaI", "root", "");
+            HashMap parametros = new HashMap();
+            parametros.put("idlancamentoordem", codigo_lancamento);
+
+            JasperPrint print = JasperFillManager.fillReport("src/relatorios/Ordem.jasper", parametros, conn);
+            JasperViewer jv = new JasperViewer(print, false);
+            jv.setVisible(true); //chama o formulario para visualização
+            jv.toFront(); //set o formulario a frente da aplicação
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao chamar o relatório!\nErro:" + ex);
         }
     }//GEN-LAST:event_jButtonImprimirOrdemActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        if (JOptionPane.showConfirmDialog(this, "Você tem certeza disso ?")
+                == JOptionPane.YES_OPTION) {
+            int linha = jTableTabelaItens.getSelectedRow();
+            if (linha >= 0) {
+                int codigo = Integer.parseInt(
+                        String.valueOf(jTableTabelaItens.getValueAt(linha, 0))
+                );
+                Lancamentos serLan = new Lancamentos();
+                serLan.deletarItensOrdem(codigo, codigo_lancamento);
+                buscaDadosItens();
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione uma linha!");
+            }
+        }
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonCancelar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelar6ActionPerformed
+        if (JOptionPane.showConfirmDialog(this, "Você tem certeza disso ?")
+                == JOptionPane.YES_OPTION) {
+            int linha = jTableTipoServico.getSelectedRow();
+            if (linha >= 0) {
+                int codigo = Integer.parseInt(
+                        String.valueOf(jTableTipoServico.getValueAt(linha, 0))
+                );
+                Lancamentos serLan = new Lancamentos();
+                serLan.deletarServicosOrdem(codigo, codigo_lancamento);
+                buscaDadosTipoServico();
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione uma linha!");
+            }
+        }
+    }//GEN-LAST:event_jButtonCancelar6ActionPerformed
+
+    private void jButtonCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelar1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButtonCancelar1ActionPerformed
 
     public void limpaCamposItens() {
         jTextFieldProduto1.setText("");
@@ -679,11 +723,8 @@ public class Lancamento extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonCancelar1;
     private javax.swing.JButton jButtonCancelar2;
-    private javax.swing.JButton jButtonCancelar3;
     private javax.swing.JButton jButtonCancelar4;
-    private javax.swing.JButton jButtonCancelar5;
     private javax.swing.JButton jButtonCancelar6;
-    private javax.swing.JButton jButtonGravar;
     private javax.swing.JButton jButtonImprimirOrdem;
     private javax.swing.JButton jButtonTipoServico1;
     private javax.swing.JButton jButtonVeiculo;

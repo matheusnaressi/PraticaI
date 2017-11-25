@@ -34,7 +34,7 @@ public class CadastroVeiculo {
             String[] linha
                     = {
                         String.valueOf(v.getIdveiculo()),
-                        String.valueOf(v.getIdveiculo()),
+                        String.valueOf(v.getNomemodelo()),
                         String.valueOf(v.getPlacaveiculo()),
                         String.valueOf(v.getModelo().getNomemodelo()),
                         String.valueOf(v.getPessoa().getNome()),};

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.4.3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubOrdemItens" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3030d3af-e211-41a5-84fe-881c59817d28">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ConexaoBancoDados.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="idlancamentoordem" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{idlancamentoordem}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select a.iditensordem, a.peca_idpeca, a.quantidade, a.valorunitario, b.descricaopeca from itensordem a 
+LEFT OUTER JOIN peca b on (a.peca_idpeca = b.idpeca) where a.lancamentoordem_idlancamentoordem  =   $P{idlancamentoordem}]]>
+	</queryString>
+	<field name="iditensordem" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="iditensordem"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="itensordem"/>
+	</field>
+	<field name="peca_idpeca" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="peca_idpeca"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="itensordem"/>
+	</field>
+	<field name="quantidade" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="quantidade"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="itensordem"/>
+	</field>
+	<field name="valorunitario" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="valorunitario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="itensordem"/>
+	</field>
+	<field name="descricaopeca" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="descricaopeca"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="peca"/>
+	</field>
+	<background>
+		<band height="25" splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="20" width="100" height="13" uuid="9869f93b-088e-4a64-8465-948b073a0faf">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aedebfa3-9db1-4ae1-9efe-3911d708d990"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Cód. Peça	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="102" y="20" width="100" height="13" uuid="fa8d7cf9-f5a8-408b-9df7-b07b18f73111">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="90332f89-5010-454c-bc5a-4abf986bd19a"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="321" y="20" width="100" height="13" uuid="398b76e3-5d8d-4981-a454-ca9bee7adbcd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="14d15078-7f38-4595-8372-37f44f36e2cd"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Qtdade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="454" y="20" width="100" height="13" uuid="68cb46b5-ae04-48d0-8e6f-25d08855c4ec">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="71043385-6ecb-425d-8ab7-59e2cad909da"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Valor Unitário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="15" uuid="d2845d4d-a3fe-4b1f-8150-33f93cf1da8e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[ITENS UTILIZADOS:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="0" width="80" height="13" uuid="d341f6cc-05a8-42b7-b0df-198877159fe2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aedebfa3-9db1-4ae1-9efe-3911d708d990"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{peca_idpeca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="102" y="0" width="210" height="13" uuid="1ba7806e-c55c-4fe9-b14a-03f37aa6a071">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="90332f89-5010-454c-bc5a-4abf986bd19a"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{descricaopeca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="321" y="0" width="100" height="13" uuid="f212c819-0018-4713-80bc-817e4f24e489">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="14d15078-7f38-4595-8372-37f44f36e2cd"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="469" y="0" width="85" height="13" uuid="ed999cbc-d052-45ee-a8e8-1708f43f162d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="71043385-6ecb-425d-8ab7-59e2cad909da"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{valorunitario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="73">
+			<subreport>
+				<reportElement mode="Opaque" x="-20" y="0" width="554" height="54" uuid="e572e91f-9a8e-430b-9b86-204a352e238b"/>
+				<subreportParameter name="lancamentoordem_idlancamentoordem">
+					<subreportParameterExpression><![CDATA[$P{idlancamentoordem}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["C:/Arquivos/SISTEMAS DE INFORMAÇÃO/4º SEMESTRE/LINGUAGEM DE PROGRAMAÇÃO I - SEXTA-FEIRA/PraticaI/PraticaI/PraticaI/src/relatorios/SubOrdemServicos.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

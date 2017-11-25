@@ -90,6 +90,7 @@ public class CadastroVeiculo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setFocusTraversalPolicyProvider(true);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -158,12 +159,12 @@ public class CadastroVeiculo extends javax.swing.JFrame {
         jPanel2.add(jTextFieldDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 330, -1));
 
         jTextFieldPessoa.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                jTextFieldPessoaAncestorMoved(evt);
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-                jTextFieldPessoaAncestorMoved(evt);
             }
         });
         jPanel2.add(jTextFieldPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 330, -1));

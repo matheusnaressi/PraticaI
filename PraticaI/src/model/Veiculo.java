@@ -25,7 +25,6 @@ public class Veiculo implements Serializable {
     @ManyToOne
     @JoinColumn(name = "pessoa_id")
     private Pessoa pessoa;
-
     private String nomemodelo;
     private String placaveiculo;
 

@@ -97,4 +97,24 @@ public class Lancamentos {
         session.getTransaction().commit();
     }
 
+    public void deletarItensOrdem(int codigo, int id_lacamento) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        ItensOrdem itens = new ItensOrdem();
+        itens.setIditensordem(codigo);
+        itens.setLancamentoordem_idlancamentoordem(id_lacamento);
+        session.getTransaction().begin();
+        session.delete(itens);
+        session.getTransaction().commit();
+    }
+
+    public void deletarServicosOrdem(int codigo, int id_lacamento) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        LancamentoTipoServico ser = new LancamentoTipoServico();
+        ser.setIdlancamentotiposervico(codigo);
+        ser.setLancamentoordem_idlancamentoordem(id_lacamento);
+        session.getTransaction().begin();
+        session.delete(ser);
+        session.getTransaction().commit();
+    }
+
 }
